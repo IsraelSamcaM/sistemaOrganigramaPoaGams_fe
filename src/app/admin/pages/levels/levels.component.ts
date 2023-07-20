@@ -1,6 +1,6 @@
 
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { JobService } from '../../services/job.service';
+import { LevelService} from '../../services/level.service';
 import { MatDialog } from '@angular/material/dialog';
 import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -18,7 +18,7 @@ export class LevelsComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
-    private cargoService: JobService,
+    private LevelService: LevelService,
     public dialog: MatDialog,
   ) {
     this.Get()
@@ -28,18 +28,13 @@ export class LevelsComponent implements AfterViewInit {
   }
 
   Get() {
-    if (this.text !== '') {
-      this.cargoService.search(this.text).subscribe(data => {
-        this.dataSource = new MatTableDataSource(data.jobs)
+   
+ 
+      this.LevelService.get().subscribe(data => {
+        this.dataSource = new MatTableDataSource(data.levels)
         this.dataSource.paginator = this.paginator;
       })
-    }
-    else {
-      this.cargoService.get().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data.jobs)
-        this.dataSource.paginator = this.paginator;
-      })
-    }
+    
   }
   applyFilter(event: Event) {
     this.text = (event.target as HTMLInputElement).value;

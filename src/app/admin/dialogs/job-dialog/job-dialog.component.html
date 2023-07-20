@@ -13,6 +13,35 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-sm-4">
+                <mat-form-field appearance="fill">
+                     <mat-label>Secretaria</mat-label>
+                     <input class="uppercase" formControlName="secretaria" matInput>
+                 </mat-form-field>
+            </div>
+
+            <div class="col-sm-4">
+                <mat-form-field appearance="fill">
+                     <mat-label>Nivel</mat-label>
+                     <input class="uppercase" formControlName="nivel" matInput>
+                 </mat-form-field>
+            </div>
+             
+            <div class="col-sm-4">
+                <mat-radio-group formControlName="option" matTooltip="Selecciona una opción">
+                  <div class="custom-radio-button">
+                    <mat-radio-button value="item">Item</mat-radio-button>
+                  </div>
+                  <div class="custom-radio-button">
+                    <mat-radio-button value="contrato">Contrato</mat-radio-button>
+                  </div>
+                </mat-radio-group>
+            </div>
+              
+              
+        </div>
+
+        <div class="row">
             <app-sever-mat-select [placeholder]="'Buscar cargos dependientes'" [data]="jobs"
                 (eventSelectedOption)="selectDependents($event)" [pathPropertyOfObjectDisplay]="'nombre'"
                 (eventSearch)="searchDependents($event)"></app-sever-mat-select>

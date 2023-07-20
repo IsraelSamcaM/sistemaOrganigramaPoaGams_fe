@@ -10,10 +10,11 @@ const base_url = environment.base_url
 export class LevelService {
 
   constructor(private http: HttpClient) { }
+  
   get() {
-    return this.http.get<{ jobs: any[], length: number }>(`${base_url}/levels`).pipe(
+    return this.http.get<{ levels: any[], length: number }>(`${base_url}/levels`).pipe(
       map(resp => {
-        return { jobs: resp.jobs, length: resp.length }
+        return { levels: resp.levels, length: resp.length }
       })
     )
   }

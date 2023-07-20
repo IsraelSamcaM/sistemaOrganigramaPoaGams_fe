@@ -4,3 +4,35 @@ mat-list {
     overflow: auto;
     height: 300px;
 }
+
+.mat-radio-button {
+    /* Tamaño de la fuente */
+    font-size: 12px;
+  
+    /* Tamaño del radio button */
+    .mat-radio-outer-circle {
+      width: 12px;
+      height: 12px;
+    }
+  
+    /* Espacio entre el radio button y el texto */
+    .mat-radio-label-content {
+      margin-left: 5px;
+    }
+  }
+
+  .custom-radio-button {
+    /* Tamaño de la fuente */
+    font-size: 8px;
+  
+    /* Tamaño del radio button */
+    .mat-radio-outer-circle {
+      width: 8px;
+      height: 8px;
+    }
+  
+    /* Espacio entre el radio button y el texto */
+    .mat-radio-label-content {
+      margin-left: 5px;
+    }
+  }
