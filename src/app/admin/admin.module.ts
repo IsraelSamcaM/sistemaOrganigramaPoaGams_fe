@@ -9,6 +9,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrgchartComponent } from './pages/orgchart/orgchart.component';
 import { OfficerDialogComponent } from './dialogs/officer-dialog/officer-dialog.component';
+import { LevelsComponent } from './pages/levels/levels.component';
+
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { OfficerDialogComponent } from './dialogs/officer-dialog/officer-dialog.
     JobsComponent,
     JobDialogComponent,
     OrgchartComponent,
-    OfficerDialogComponent
+    OfficerDialogComponent,
+    LevelsComponent,
+    
   ],
   imports: [
     CommonModule,

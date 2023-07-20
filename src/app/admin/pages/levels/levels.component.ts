@@ -1,5 +1,6 @@
+
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { LevelService } from '../../services/level.service';
+import { JobService } from '../../services/job.service';
 import { MatDialog } from '@angular/material/dialog';
 import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,9 +11,9 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './levels.component.html',
   styleUrls: ['./levels.component.css']
 })
-export class JobsComponent implements AfterViewInit {
+export class LevelsComponent implements AfterViewInit {
   text: string = ''
-  displayedColumns = ['nivel','options']
+  displayedColumns = ['nivel','sueldo','options']
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,33 +41,6 @@ export class JobsComponent implements AfterViewInit {
       })
     }
   }
-
-  Edit(item: any) {
-    const dialogRef = this.dialog.open(JobDialogComponent, {
-      width: '800px',
-      data: item
-    });
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        const index = this.dataSource.data.findIndex(element => element._id === result._id);
-        this.dataSource.data[index] = result
-        this.dataSource = new MatTableDataSource(this.dataSource.data)
-        this.dataSource.paginator = this.paginator;
-      }
-    });
-  }
-  add() {
-    const dialogRef = this.dialog.open(JobDialogComponent, {
-      width: '800px'
-    });
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        this.dataSource = new MatTableDataSource([result, ...this.dataSource.data])
-        this.dataSource.paginator = this.paginator;
-      }
-    })
-  }
-
   applyFilter(event: Event) {
     this.text = (event.target as HTMLInputElement).value;
     this.Get()

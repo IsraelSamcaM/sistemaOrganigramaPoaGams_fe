@@ -28,7 +28,7 @@ export class OfficerService {
     return this.http.get<{ ok: boolean, officers: any[], length: number }>(`${base_url}/officers`).pipe(
       map(resp => {
         return { officers: resp.officers, length: resp.length }
-      })
+      })  
     )
   }
 
