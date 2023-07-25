@@ -58,17 +58,21 @@ export class JobService {
   }
 
   getOrganization() {
-    return this.http.get<any[]>(`${base_url}/jobs/organization/data`).pipe(
+    return this.http.get<{organigrama:any[],tags:any}>(`${base_url}/jobs/organization/data`).pipe(
       map(resp => {
-        return resp.map(el => {
-          el.data.forEach((item: any, index: number) => {
-            if (item.name === 'Sin funcionario') {
-              el.data[index].tags = ["no-user"];
-            }
-          })
-          return el
-        })
+        // return resp.map(el => {
+        //   /*
+        //   el.data.forEach((item: any, index: number) => {
+        //     if (item.name === 'Sin funcionario') {
+        //       el.data[index].tags = ["no-user"];
+        //     }
+        //   })*/
+        //   return el
+        // })
+
+        return {organigrama:resp.organigrama,tags:resp.tags}
       })
     )
   }
 }
+
