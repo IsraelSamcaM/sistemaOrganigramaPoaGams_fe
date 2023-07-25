@@ -6,6 +6,11 @@ import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.componen
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+
+//import { JobService } from '../../services/job.service';
+
+
+
 @Component({
   selector: 'app-levels',
   templateUrl: './levels.component.html',
@@ -44,4 +49,30 @@ export class LevelsComponent implements AfterViewInit {
     this.text = ''
     this.Get()
   }
+  Edit(item: any) {
+    const dialogRef = this.dialog.open(JobDialogComponent, {
+      width: '800px',
+      data: item
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        const index = this.dataSource.data.findIndex(element => element._id === result._id);
+        this.dataSource.data[index] = result
+        this.dataSource = new MatTableDataSource(this.dataSource.data)
+        this.dataSource.paginator = this.paginator;
+      }
+    });
+  }
+  add() {
+    const dialogRef = this.dialog.open(JobDialogComponent, {
+      width: '800px'
+    });
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.dataSource = new MatTableDataSource([result, ...this.dataSource.data])
+        this.dataSource.paginator = this.paginator;
+      }
+    })
+  }
+
 }
