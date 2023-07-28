@@ -43,12 +43,14 @@ export class OrgchartComponent {
           csv: { text: "Export CSV" },
           json: { text: "Export JSON" }
         },
+        //layout: OrgChart.treeLeftOffset,
         template: "ula",
         tags: this.tags,
-        //layout: OrgChart.treeLeftOffset,
+      
         editForm: {
           readOnly: true,
           generateElementsFromFields: false,
+
           titleBinding: undefined,
           elements: [
             { type: 'textbox', label: 'Funcionario', binding: 'title' },

@@ -4,12 +4,3 @@ mat-list {
     overflow: auto;
     height: 300px;
 }
-
-
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
-}
-
-
-
-  

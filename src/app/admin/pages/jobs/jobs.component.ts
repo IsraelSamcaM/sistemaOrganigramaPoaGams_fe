@@ -12,7 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class JobsComponent implements AfterViewInit {
   text: string = ''
-  displayedColumns = ['nombre','secretaria','tipoContrato','nivel_id','options']
+  displayedColumns = ['nombre','secretaria','tipoContrato','nivel_id.nivel','options']
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

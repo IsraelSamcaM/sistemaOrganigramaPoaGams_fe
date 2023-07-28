@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrgchartComponent } from './pages/orgchart/orgchart.component';
 import { OfficerDialogComponent } from './dialogs/officer-dialog/officer-dialog.component';
 import { LevelsComponent } from './pages/levels/levels.component';
+import { LevelDialogComponent } from './dialogs/level-dialog/level-dialog.component';
 
 
 
@@ -21,6 +22,7 @@ import { LevelsComponent } from './pages/levels/levels.component';
     OrgchartComponent,
     OfficerDialogComponent,
     LevelsComponent,
+    LevelDialogComponent,
     
   ],
   imports: [

@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>{{data?'EDICION':'CREACION'}} NIVEL</h2>
+<mat-dialog-content class="mat-typography">
+            <form [formGroup]="FormLevel">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Nivel</mat-label>
+                            <input formControlName="nivel" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-5">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Sueldo</mat-label>
+                            <input formControlName="sueldo" matInput>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>CNS</mat-label>
+                            <input formControlName="cajaSalud" matInput>
+                        </mat-form-field>
+                    </div>  
+        
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Solidario</mat-label>
+                            <input formControlName='solidario' matInput>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Profesional</mat-label>
+                            <input formControlName='profecional' matInput>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Pro Vivienda</mat-label>
+                            <input formControlName='proVivienda' matInput>
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+                             
+            </form>
+         
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-flat-button color="primary" >Aceptar</button>
+</mat-dialog-actions>

@@ -34,8 +34,13 @@
                     <th mat-header-cell *matHeaderCellDef> Estado </th>
                     <td mat-cell *matCellDef="let element"> {{element?.tipoContrato}} </td>
                 </ng-container>
+
+                <ng-container matColumnDef="nivel_id.nivel">
+                    <th mat-header-cell *matHeaderCellDef> Nivel </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.nivel_id.nivel}} </td>
+                </ng-container>
                 
-                <ng-container matColumnDef="nivel_id">
+                <!-- <ng-container matColumnDef="nivel_id">
                     <th mat-header-cell *matHeaderCellDef> Nivel </th>
                     <td mat-cell *matCellDef="let element">
                         <ng-container *ngIf="element.nivel_id; else noJobTemplate">
@@ -45,7 +50,7 @@
                             <span style="color: red;">SIN SUELDO</span>
                         </ng-template>
                     </td>
-                </ng-container>
+                </ng-container> -->
 
                 <ng-container matColumnDef="options">
                     <th mat-header-cell *matHeaderCellDef> </th>

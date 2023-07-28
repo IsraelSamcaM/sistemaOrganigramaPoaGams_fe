@@ -3,6 +3,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { LevelService} from '../../services/level.service';
 import { MatDialog } from '@angular/material/dialog';
 import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.component';
+import { LevelDialogComponent } from '../../dialogs/level-dialog/level-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -50,7 +51,7 @@ export class LevelsComponent implements AfterViewInit {
     this.Get()
   }
   Edit(item: any) {
-    const dialogRef = this.dialog.open(JobDialogComponent, {
+    const dialogRef = this.dialog.open(LevelDialogComponent, {
       width: '800px',
       data: item
     });
@@ -64,7 +65,7 @@ export class LevelsComponent implements AfterViewInit {
     });
   }
   add() {
-    const dialogRef = this.dialog.open(JobDialogComponent, {
+    const dialogRef = this.dialog.open(LevelDialogComponent, {
       width: '800px'
     });
     dialogRef.afterClosed().subscribe((result: any) => {
