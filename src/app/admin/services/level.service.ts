@@ -18,7 +18,22 @@ export class LevelService {
       })
     )
   }
-  
 
+  edit(id_level: string, level: any) {
+    return this.http.put<any>(`${base_url}/levels/${id_level}`, level).pipe(
+      map(resp => resp)
+    )
+  }
+  
+  add(level: any) {
+    return this.http.post<any>(`${base_url}/levels`, level).pipe(
+      map(resp => resp)
+    )
+  }
+
+  delete(id_level: string) {
+    return this.http.delete<any>(`${base_url}/levels/${id_level}`).pipe(
+      map(resp => resp))
+  }
 
 }

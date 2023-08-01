@@ -26,6 +26,7 @@ export class LevelDialogComponent {
     private nivelService: LevelService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<LevelDialogComponent>,
+    private usuariosService: LevelService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
 
@@ -36,5 +37,18 @@ export class LevelDialogComponent {
       this.FormLevel.patchValue(this.data)
       console.log(this.data)
     }
- }
+  }
+
+  guardar() {
+    if (this.data) {  
+      this.usuariosService.edit(this.data._id, this.FormLevel.value).subscribe(levels => {
+        this.dialogRef.close(levels);
+      })
+    }
+    else {
+      this.usuariosService.add(this.FormLevel.value).subscribe(levels => {
+        this.dialogRef.close(levels)
+      })
+    }
+  }
 }

@@ -8,10 +8,12 @@ import { JobService } from '../../services/job.service';
   templateUrl: './job-dialog.component.html',
   styleUrls: ['./job-dialog.component.css']
 })
+
 export class JobDialogComponent {
   jobs: any[] = []
   dependentJobs: any[] = []
   tipoContrato: string
+  accentColor = 'rgb(183, 253, 113)';
   FormJob: FormGroup = this.fb.group({
     nombre: ['', Validators.required],
     secretaria: ['', Validators.required],

@@ -33,7 +33,7 @@
                     <div class="col-sm-4">
                         <mat-radio-group ng model formControlName="tipoContrato">
                         <div class="custom-radio-button">
-                            <mat-radio-button value="ITEM">Item</mat-radio-button>
+                            <mat-radio-button  value="ITEM">Item</mat-radio-button>
                         </div>
                         <div class="custom-radio-button">
                             <mat-radio-button value="CONTRATO">Contrato</mat-radio-button>
@@ -44,21 +44,19 @@
                     
                 </div>
                 
-                <div class="row">
-                    
-                    <div class="col-sm-4">
-                        <mat-radio-group ng model formControlName="tipoContrato">
-                        <div class="custom-radio-button">
-                            <mat-radio-button value="ITEM">Rojo</mat-radio-button>
-                        </div>
-                        <div class="custom-radio-button">
-                            <mat-radio-button value="CONTRATO">Contrato</mat-radio-button>
-                        </div>
-                        </mat-radio-group>
+                <div class="row" center>
+                    <div class="col-sm-12">
+                        <mat-chip-listbox ng model formControlName="color">
+                            <mat-chip-option [style.background]="'rgb(221, 226, 205)'" value="ITEM">Item</mat-chip-option>
+                            <mat-chip-option [style.background]="'rgb(147, 205, 221)'" value="EVENTUAL">Eventual</mat-chip-option>
+                            <mat-chip-option [style.background]="'rgb(183, 253, 113)'" value="ASCENSO">Ascenso</mat-chip-option>
+                            <mat-chip-option [style.background]="'rgb(121, 149, 64)'" value="CREACION">Creacion</mat-chip-option>
+                            <mat-chip-option [style.background]="'rgb(255, 255, 0)'" value="REUBICACION">Reubicacion</mat-chip-option>
+                            <mat-chip-option [style.background]="'rgb(242, 220, 218)'" value="DESCENSO">Descenso</mat-chip-option>
+                            <mat-chip-option [style.background]="'rgb(255, 0, 0)'" value="ELIMINCION">Eliminacion</mat-chip-option>
+                          </mat-chip-listbox>
                     </div>
-                    
-                    
-                </div>
+                </div>                  
         
                 <div class="row">
                     <app-sever-mat-select [placeholder]="'Buscar cargos dependientes'" [data]="jobs"

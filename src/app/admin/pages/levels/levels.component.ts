@@ -76,4 +76,17 @@ export class LevelsComponent implements AfterViewInit {
     })
   }
 
+ 
+  delete(level: any) {
+    this.LevelService.delete(level._id).subscribe(() => {
+      const indexFound = this.dataSource.data.findIndex((element: any) => element._id === level._id);
+      if (indexFound !== -1) {
+        this.dataSource.data.splice(indexFound, 1); // Eliminar el elemento del array de datos
+        this.dataSource = new MatTableDataSource(this.dataSource.data); // Actualizar la fuente de datos
+        this.dataSource.paginator = this.paginator; // Actualizar el paginador si es necesario
+      }
+    });
+  }
+  
+
 }
