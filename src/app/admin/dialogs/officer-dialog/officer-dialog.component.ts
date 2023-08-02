@@ -49,13 +49,13 @@ export class OfficerDialogComponent {
     if (this.data) {  
       this.usuariosService.edit(this.data._id, this.Form_Funcionario.value).subscribe(officer => {
         this.dialogRef.close(officer);
-      })
+      })  
     }
     else {
       this.usuariosService.add(this.Form_Funcionario.value).subscribe(officer => {
         this.dialogRef.close(officer)
       })
-    }
+    }   
   }
 
   searchJob(value: any) {

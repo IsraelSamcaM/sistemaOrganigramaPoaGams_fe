@@ -32,6 +32,7 @@ export class OrgchartComponent {
     this.organizationData.forEach(el =>console.log(el))
     })
   }
+  
   tabChange(event: MatTabChangeEvent) {
     const tree = document.getElementById(`s${event.index}`);
     if (tree) {

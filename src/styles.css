@@ -44,3 +44,14 @@ body {
 .node.no-user text {
     fill: white;
 }
+
+.node.item rect {
+    fill: #DDE2CD;
+}
+.node.eventual rect {
+    fill: #93CDDD;
+}
+
+  
+    
+

@@ -2,23 +2,27 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobService } from '../../services/job.service';
+import { LevelService } from '../../services/level.service';
 
 @Component({
   selector: 'app-job-dialog',
   templateUrl: './job-dialog.component.html',
   styleUrls: ['./job-dialog.component.css']
+
 })
 
 export class JobDialogComponent {
   jobs: any[] = []
   dependentJobs: any[] = []
   tipoContrato: string
-  accentColor = 'rgb(183, 253, 113)';
+  niveles: any[] = []
+  
   FormJob: FormGroup = this.fb.group({
     nombre: ['', Validators.required],
     secretaria: ['', Validators.required],
-    nivel: ['', Validators.required],
+    nivel_id: ['', Validators.required],
     isRoot: [false, Validators.required],
+    estado: [false, Validators.required],
     tipoContrato: ['', Validators.required]   
   }); 
   FormJobDetail: FormGroup = this.fb.group({
@@ -34,6 +38,7 @@ export class JobDialogComponent {
 
   constructor(
     private cargoService: JobService,
+    private levelService: LevelService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<JobDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -41,14 +46,21 @@ export class JobDialogComponent {
 
   }
   ngOnInit(): void {
-     if (this.data) {
+    console.log(this.data)
+    this.levelService.get().subscribe(data=>{
+      this.niveles=data.levels          
+    })
+    
+    if (this.data) {
       const { nivel_id, ...values } = this.data
-       this.FormJob.patchValue(this.data)
+       ///this.FormJob.patchValue(this.data)
        this.cargoService.getDependentsOfSuperior(this.data._id).subscribe(jobs => this.dependentJobs = jobs)
-       this.FormJob.patchValue({ ...values, nivel: nivel_id.nivel })
+       this.FormJob.patchValue({ ...values, nivel_id: nivel_id._id })
        this.FormJobDetail.patchValue({ ... this.data.detalle_id})
        console.log(this.data)
      }
+
+
   }
 
   
@@ -89,6 +101,11 @@ export class JobDialogComponent {
       this.dependentJobs.splice(position, 1)
     }
 
+  }
+  
+  nivelSeleccionado(event: any) {
+    const selectedValue = event.value;
+    console.log('Nivel seleccionado:', selectedValue);
   }
 
 }

@@ -24,11 +24,15 @@
                     </div>  
         
                     <div class="col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field>
                             <mat-label>Nivel</mat-label>
-                            <input formControlName='nivel' matInput>
-                        </mat-form-field>
-                    </div>
+                            <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>
+                              <mat-option *ngFor="let lev of niveles" [value]="lev._id">
+                                {{lev.nivel}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                    </div>  
                     
                     <div class="col-sm-4">
                         <mat-radio-group ng model formControlName="tipoContrato">
@@ -44,9 +48,9 @@
                     
                 </div>
                 
-                <div class="row" center>
+                 <div class="row">
                     <div class="col-sm-12">
-                        <mat-chip-listbox ng model formControlName="color">
+                        <mat-chip-listbox ng model formControlName="estado">
                             <mat-chip-option [style.background]="'rgb(221, 226, 205)'" value="ITEM">Item</mat-chip-option>
                             <mat-chip-option [style.background]="'rgb(147, 205, 221)'" value="EVENTUAL">Eventual</mat-chip-option>
                             <mat-chip-option [style.background]="'rgb(183, 253, 113)'" value="ASCENSO">Ascenso</mat-chip-option>
@@ -56,8 +60,8 @@
                             <mat-chip-option [style.background]="'rgb(255, 0, 0)'" value="ELIMINCION">Eliminacion</mat-chip-option>
                           </mat-chip-listbox>
                     </div>
-                </div>                  
-        
+                </div>                   
+                
                 <div class="row">
                     <app-sever-mat-select [placeholder]="'Buscar cargos dependientes'" [data]="jobs"
                         (eventSelectedOption)="selectDependents($event)" [pathPropertyOfObjectDisplay]="'nombre'"
