@@ -42,15 +42,15 @@ body {
 }
 
 .node.no-user text {
-    fill: white;
+    fill: rgb(51, 41, 41);
 }
 
-.node.item rect {
+/* .node.item rect {
     fill: #DDE2CD;
 }
 .node.eventual rect {
     fill: #93CDDD;
-}
+} */
 
   
     

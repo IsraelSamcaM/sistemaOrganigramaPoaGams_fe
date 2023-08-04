@@ -29,7 +29,6 @@ export class OrgchartComponent {
       this.organizationData = data.organigrama
       this.tags = data.tags
       console.log(data.tags)
-    this.organizationData.forEach(el =>console.log(el))
     })
   }
   

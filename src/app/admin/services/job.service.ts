@@ -60,25 +60,25 @@ export class JobService {
   getOrganization() {
     return this.http.get<{organigrama:any[],tags:any}>(`${base_url}/jobs/organization/data`).pipe(
       map(resp => {
-        const newOrg=resp.organigrama.map(el => {         
-          el.data.forEach((item: any, index: number) => {
-            // if (item.name === 'Sin funcionario') {
-            //   el.data[index].tags = ["no-user"];
-            // }
-            if(item.estado =="ITEM"){
-              el.data[index].tags=el.data[index].tags[0]+' '+'item'
+        // const newOrg=resp.organigrama.map(el => {         
+        //   el.data.forEach((item: any, index: number) => {
+        //     // if (item.name === 'Sin funcionario') {
+        //     //   el.data[index].tags = ["no-user"];
+        //     // }
+        //     // if(item.estado =="ITEM"){
+        //     //   el.data[index].tags=el.data[index].tags[0]+' '+'item'
 
-            }
-            else if(item.estado =="EVENTUAL"){
-              el.data[index].tags=el.data[index].tags[0]+' '+'eventual'
+        //     // }
+        //     // else if(item.estado =="EVENTUAL"){
+        //     //   el.data[index].tags=el.data[index].tags[0]+' '+'eventual'
 
-            }
-          })
-          return el
-        })
+        //     // }
+        //   })
+        //   return el
+        // })
 
         console.log(resp.organigrama)
-        return {organigrama:newOrg,tags:resp.tags}
+        return {organigrama:resp.organigrama,tags:resp.tags}
       })
     )
   }
