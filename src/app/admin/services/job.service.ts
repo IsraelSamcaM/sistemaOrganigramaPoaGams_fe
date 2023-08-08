@@ -39,6 +39,25 @@ export class JobService {
       })
     )
   }
+//metodo de escala salarial 
+  getEscalaSalarial() {
+    return this.http.get<{ salarios: any[], length: number }>(`${base_url}/jobs/escala`).pipe(
+      map(resp => {
+        return { salarys: resp.salarios, length: resp.length }
+      })
+    )
+  }
+
+  //metodo de total escala salarial 
+  getTotalEscalaSalarial() {
+    return this.http.get<{ totalSalarios: any[], length: number }>(`${base_url}/jobs/totalEscala`).pipe(
+      map(resp => {
+        return { totalSalarys: resp.totalSalarios, length: resp.length }
+      })
+    )
+  }
+
+ 
   search(text: string) {
     return this.http.get<{ jobs: any[], length: number }>(`${base_url}/jobs/${text}`).pipe(
       map(resp => {

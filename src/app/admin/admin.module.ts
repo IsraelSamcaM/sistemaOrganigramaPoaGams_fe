@@ -11,6 +11,7 @@ import { OrgchartComponent } from './pages/orgchart/orgchart.component';
 import { OfficerDialogComponent } from './dialogs/officer-dialog/officer-dialog.component';
 import { LevelsComponent } from './pages/levels/levels.component';
 import { LevelDialogComponent } from './dialogs/level-dialog/level-dialog.component';
+import { SalaryComponent } from './pages/salary/salary.component';
 
 
 
@@ -23,6 +24,7 @@ import { LevelDialogComponent } from './dialogs/level-dialog/level-dialog.compon
     OfficerDialogComponent,
     LevelsComponent,
     LevelDialogComponent,
+    SalaryComponent,
     
   ],
   imports: [

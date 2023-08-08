@@ -4,6 +4,7 @@ import { OfficersComponent } from './pages/officers/officers.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
 import { OrgchartComponent } from './pages/orgchart/orgchart.component';
 import { LevelsComponent } from './pages/levels/levels.component';
+import { SalaryComponent } from './pages/salary/salary.component';
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'jobs', component: JobsComponent },
   { path: 'orgchart', component: OrgchartComponent },
   { path: 'levels', component: LevelsComponent },
+  { path: 'salary', component: SalaryComponent },
   
 ];
 
