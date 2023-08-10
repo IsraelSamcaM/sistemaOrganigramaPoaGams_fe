@@ -56,7 +56,42 @@ export class JobService {
       })
     )
   }
+  
+  //metodo de global de eventuales 
+  getTotalEscalaSalarialTotal() {
+    return this.http.get<{ totalSalariosPartidaTotal: any[], length: number }>(`${base_url}/jobs/escalaPartidaPresupuestariaTotal`).pipe(
+      map(resp => {
+        return { totalSalarysEventualGlobal: resp.totalSalariosPartidaTotal, length: resp.length }
+      })
+    )
+  }
 
+  //metodo de global de items 
+  getGlobalItemSalariosTotal() {
+    return this.http.get<{ globalSalariosItemTotal: any[], length: number }>(`${base_url}/jobs/totalGlobalItems`).pipe(
+      map(resp => {
+        return { globalSalarysItemTotal: resp.globalSalariosItemTotal, length: resp.length }
+      })
+    )
+  }
+
+  //metodo de total escala salarial por partida presupuestaria
+  getEscalaSalarialPartidaPresupuestaria() {
+    return this.http.get<{ totalSalariosPartida: any[], length: number }>(`${base_url}/jobs/escalaPartidaPresupuestaria`).pipe(
+      map(resp => {
+        return { totalSalarysPartida: resp.totalSalariosPartida, length: resp.length }
+      })
+    )
+  }
+
+  //metodo que saca todo por secretaria 
+  getTotalSecretariaSalario() {
+    return this.http.get<{ globalSecretarias: any[], length: number }>(`${base_url}/jobs/totalGlobalSecretarias`).pipe(
+      map(resp => {
+        return { secretariasTotalSalarys: resp.globalSecretarias, length: resp.length }
+      })
+    )
+  }
  
   search(text: string) {
     return this.http.get<{ jobs: any[], length: number }>(`${base_url}/jobs/${text}`).pipe(

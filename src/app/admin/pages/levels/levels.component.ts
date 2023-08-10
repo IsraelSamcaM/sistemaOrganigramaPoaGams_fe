@@ -19,7 +19,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class LevelsComponent implements AfterViewInit {
   text: string = ''
-  displayedColumns = ['nivel','sueldo','options']
+  displayedColumns = ['nivel','sueldo','cajaSalud','solidario','profecional','proVivienda','options']
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
