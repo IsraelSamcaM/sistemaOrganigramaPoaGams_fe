@@ -100,14 +100,14 @@ export class JobService {
       })
     )
   }
-  add(job: any) {
-    return this.http.post<any>(`${base_url}/jobs`, job).pipe(
+  add(job: any, jobDetail:any) {
+    return this.http.post<any>(`${base_url}/jobs`, { job, jobDetail}).pipe(
       map(resp => resp)
     )
   }
-  edit(id: string, job: any) {
-    return this.http.put<any>(`${base_url}/jobs/${id}`, job).pipe(
-      map(resp => resp)
+  edit(id: string, job: any, jobDetail:any) {
+    return this.http.put<any>(`${base_url}/jobs/${id}`,  { job, jobDetail}).pipe(
+      map(resp =>resp)
     )
   }
 

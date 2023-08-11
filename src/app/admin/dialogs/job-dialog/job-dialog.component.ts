@@ -28,7 +28,7 @@ export class JobDialogComponent {
   FormJobDetail: FormGroup = this.fb.group({
     partidaPresupuestaria: ['', Validators.required],
     objetivoPuesto: ['', Validators.required],
-    denominacionPuesto: ['', Validators.required],
+    denominacionPuesto: ['', Validators.required],  
     tipoGasto: [false, Validators.required],
     casos: ['', Validators.required] ,
     fuenteFinanciamiento: ['', Validators.required],
@@ -76,13 +76,13 @@ export class JobDialogComponent {
       ...this.FormJob.value,
       dependents: this.dependentJobs.map(element => element._id)
     }
+
     if (this.data) {
-      this.cargoService.edit(this.data._id, newJob).subscribe(job => this.dialogRef.close(job))
+      this.cargoService.edit(this.data._id, newJob, this.FormJobDetail.value).subscribe(job => this.dialogRef.close(job))
     }
     else {
-      this.cargoService.add(newJob).subscribe(job => this.dialogRef.close(job))
+      this.cargoService.add(newJob, this.FormJobDetail.value).subscribe(job => this.dialogRef.close(job))
     }
-
   }
 
   selectDependents(value: any) {

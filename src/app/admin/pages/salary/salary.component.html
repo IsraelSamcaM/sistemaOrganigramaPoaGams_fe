@@ -168,7 +168,7 @@
         
                         <ng-container matColumnDef="totalAportes">
                             <th mat-header-cell *matHeaderCellDef>Aportes Patronales</th>
-                            <td mat-cell *matCellDef="let element"> {{element?.totalAportes|currency:"Bs "}} </td>
+                            <td mat-cell *matCellDef="let element"> {{element?.totalAportesRedondeado|currency:"Bs "}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="totalAguinaldos">
