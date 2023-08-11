@@ -40,8 +40,7 @@ export class OrgchartComponent {
           pdf: { text: "Export PDF" },
           png: { text: "Export PNG" },
           svg: { text: "Export SVG" },
-          csv: { text: "Export CSV" },
-          json: { text: "Export JSON" }
+          csv: { text: "Export CSV" }
         },
         //layout: OrgChart.treeLeftOffset,
         template: "ula",

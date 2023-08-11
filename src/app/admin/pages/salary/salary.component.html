@@ -219,22 +219,22 @@
                         </ng-container>
         
                         <ng-container matColumnDef="totalCostoAnual">
-                            <th mat-header-cell *matHeaderCellDef>Sueldo Mensual</th>
+                            <th mat-header-cell *matHeaderCellDef>Sueldo Anual</th>
                             <td mat-cell *matCellDef="let element"> {{element?.totalCostoAnual|currency:"Bs "}} </td>
                         </ng-container>
         
                         <ng-container matColumnDef="totalAportes">
-                            <th mat-header-cell *matHeaderCellDef>Sueldo Anual</th>
-                            <td mat-cell *matCellDef="let element"> {{element?.totalAportes|currency:"Bs "}} </td>
+                            <th mat-header-cell *matHeaderCellDef>Total Aportes</th>
+                            <td mat-cell *matCellDef="let element"> {{element?.totalAportesRedondeado|currency:"Bs "}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="totalAguinaldos">
-                            <th mat-header-cell *matHeaderCellDef>Sueldo Anual</th>
+                            <th mat-header-cell *matHeaderCellDef>Aguinaldo</th>
                             <td mat-cell *matCellDef="let element"> {{element?.totalAguinaldos|currency:"Bs "}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="total">
-                            <th mat-header-cell *matHeaderCellDef>Sueldo Anual</th>
+                            <th mat-header-cell *matHeaderCellDef>Total</th>
                             <td mat-cell *matCellDef="let element"> {{element?.total|currency:"Bs "}} </td>
                         </ng-container>
         

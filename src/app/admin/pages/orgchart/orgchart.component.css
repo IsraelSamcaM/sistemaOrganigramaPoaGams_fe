@@ -2,3 +2,12 @@
   height: 80vh;
 }
 
+[data-n-id] rect {
+  fill: #016e25;
+}
+
+.field_0 {
+  font-family: Impact;
+  text-transform: uppercase;
+  fill: #6d2020;
+}
