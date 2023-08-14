@@ -20,7 +20,7 @@ body {
 }
 
 [data-n-id] rect {
-    fill: #F4F1BB;
+    fill: #DDE2CD;
 }
 
 [data-n-id] rect:hover {
@@ -30,13 +30,18 @@ body {
 .field_0 {
     font-family: Impact;
     text-transform: uppercase;
-    fill: #6d2020;
+    fill: #ac2222;
 }
 
 .field_1 {
+    font-family: Cambria;
     text-transform: uppercase;
+    fill: #0c0a0a;
+    text-anchor: middle; 
+    white-space: pre-line;
+    word-wrap: break-word; 
 }
-
+  
 
 .node.no-user rect {
     fill: #F25C54;

@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-salary',
@@ -18,27 +18,32 @@ export class SalaryComponent {
   displayedColumns2 = ['total','totalCantidadCargos','totalSueldo','totalSueldoMensual','totalSueldoAnual']
   displayedColumns3 = ['partidaPresupuestaria','cantidadCargos','totalSueldos','totalSueldoAnual','aportes','aguinaldo','total']
   displayedColumns4 = ['partidaPresupuestaria','cantidadCargos','totalSueldos','totalCostoAnual','totalAportes','totalAguinaldos','total']
-  displayedColumns5 = ['nombre','cantidadCargos','totalSueldos','totalCostoAnual','totalAportes','totalAguinaldos','total']
+  displayedColumns5 = ['DatosGenerales','TotalItems','TotalSueldoMensual','TotalSueldoAnual','TotalAguinaldo','TotalCNS','TotalAFP','TotalProVivienda','TotalAporteSolidario','TotalAportes','TotalTotal' ]
   displayedColumns6 = ['_id','cantidadCargos','cantidadItem','cantidadContrato','totalSueldos','totalSueldoAnual','aportes','aguinaldos','total']
+  displayedColumns7 = ['nombre','tipoContrato','nivel','sueldoMensual','sueldoAnual','Aguinaldo','CNS','AFP','proVivienda','AporteSolidario','TotalAportes','Total']
 
   dataSource = new MatTableDataSource<any>([]);
   dataSource2 = new MatTableDataSource<any>([]);
   dataSource3 = new MatTableDataSource<any>([]);
   dataSource4 = new MatTableDataSource<any>([]);
   dataSource5 = new MatTableDataSource<any>([]);
-  dataSource6 = new MatTableDataSource<any>([]);
+  dataSource6 = new MatTableDataSource<any>([]);  
+  dataSource7 = new MatTableDataSource<any>([]);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(
+  @ViewChild('paginatorParPre') paginatorParPre: MatPaginator;
+  @ViewChild('paginatorItems') paginatorItems: MatPaginator;
+
+  constructor(  
     private cargoService: JobService,
     public dialog: MatDialog,
   ) {
     this.Get()
-    this.GetTotal()
+    this.GetTotal() 
     this.GetTotalPartidaPresupestaria() 
     this.GetTotalPartidaPresupestariaGlobal()
     this.GetTotalItemsSalariosGlobal()
     this.GetSecretariasGlobal()
+    this.GetFullItems()
   }
   ngAfterViewInit() {
     
@@ -59,7 +64,7 @@ export class SalaryComponent {
   GetTotalPartidaPresupestaria() {
     this.cargoService.getEscalaSalarialPartidaPresupuestaria().subscribe(data => {
       this.dataSource3 = new MatTableDataSource(data.totalSalarysPartida)
-      this.dataSource3.paginator = this.paginator;
+      this.dataSource3.paginator = this.paginatorParPre;
     })
   }
 
@@ -80,4 +85,47 @@ export class SalaryComponent {
       this.dataSource6 = new MatTableDataSource(data.secretariasTotalSalarys)
     })
   }
+  /**/ 
+  GetFullItems() {
+    this.cargoService.getFullItems().subscribe(data => {
+      this.dataSource7 = new MatTableDataSource(data.fullItems)
+      this.dataSource7.paginator = this.paginatorItems;
+    })
+  }
+
+  
+  exportToExcel(dataSources: MatTableDataSource<any>[], displayedColumnsArray: string[][], fileNames: string[]): void {
+    const book: XLSX.WorkBook = XLSX.utils.book_new();
+
+    dataSources.forEach((dataSource, index) => {
+        const data = dataSource.data;
+        const displayedColumns = displayedColumnsArray[index];
+        const table = document.createElement('table');
+        const tableHeaderRow = document.createElement('tr');
+        
+        displayedColumns.forEach(column => {
+            const headerCell = document.createElement('th');
+            headerCell.textContent = column;
+            tableHeaderRow.appendChild(headerCell);
+        });
+        table.appendChild(tableHeaderRow);
+        
+        data.forEach(item => {
+            const dataRow = document.createElement('tr');
+            displayedColumns.forEach(column => {
+                const cell = document.createElement('td');
+                cell.textContent = item[column] || '';
+                dataRow.appendChild(cell);
+            });
+            table.appendChild(dataRow);
+        });
+        
+        const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(table);
+        XLSX.utils.book_append_sheet(book, worksheet, `Sheet${index + 1}`);
+    });
+
+    XLSX.writeFile(book, 'EscalaSalarial.xlsx');
+  }
+  
+  
 }

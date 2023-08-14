@@ -15,7 +15,10 @@
 }
 
 h1.example-app-name {
+    display: flex;
+    margin: 16px 0 16px 8px;
     margin-left: 8px;
+    font-size: 20px; 
 }
 
 .example-sidenav-container {

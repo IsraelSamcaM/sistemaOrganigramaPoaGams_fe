@@ -66,11 +66,21 @@ export class JobService {
     )
   }
 
-  //metodo de global de items 
+  //metodo de global de items buevo 
   getGlobalItemSalariosTotal() {
     return this.http.get<{ globalSalariosItemTotal: any[], length: number }>(`${base_url}/jobs/totalGlobalItems`).pipe(
       map(resp => {
         return { globalSalarysItemTotal: resp.globalSalariosItemTotal, length: resp.length }
+      })
+    )
+  }
+
+  /* get total de items*/ 
+  
+  getFullItems() {
+    return this.http.get<{ fullItemsTable: any[], length: number }>(`${base_url}/jobs/fullItemsTable`).pipe(
+      map(resp => {
+        return { fullItems: resp.fullItemsTable, length: resp.length }
       })
     )
   }
