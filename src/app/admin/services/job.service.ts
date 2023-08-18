@@ -124,22 +124,36 @@ export class JobService {
   getOrganization() {
     return this.http.get<{organigrama:any[],tags:any}>(`${base_url}/jobs/organization/data`).pipe(
       map(resp => {
-        // const newOrg=resp.organigrama.map(el => {         
-        //   el.data.forEach((item: any, index: number) => {
-        //     // if (item.name === 'Sin funcionario') {
-        //     //   el.data[index].tags = ["no-user"];
-        //     // }
-        //     // if(item.estado =="ITEM"){
-        //     //   el.data[index].tags=el.data[index].tags[0]+' '+'item'
-
-        //     // }
-        //     // else if(item.estado =="EVENTUAL"){
-        //     //   el.data[index].tags=el.data[index].tags[0]+' '+'eventual'
-
-        //     // }
-        //   })
-        //   return el
-        // })
+        const newOrg=resp.organigrama.map(el => {         
+          el.data.forEach((item: any, index: number) => {
+            // if (item.name === 'Sin funcionario') {
+            //   el.data[index].tags = ["no-user"];
+            // }
+         
+            if(item.estado =="ITEM"){
+              el.data[index].tags=['item']
+            }
+            else if(item.estado =="EVENTUAL"){
+              el.data[index].tags=['eventual']
+            }
+            else if(item.estado =="ASCENSO"){
+              el.data[index].tags=['ascenso']
+            }
+            else if(item.estado =="CREACION"){
+              el.data[index].tags=['creacion']
+            }
+            else if(item.estado =="REUBICACION"){
+              el.data[index].tags=['reubicacion']
+            }
+            else if(item.estado =="DESCENSO"){
+              el.data[index].tags=['descenso']
+            }
+            else if(item.estado =="ELIMINACION"){
+              el.data[index].tags=['eliminacion']
+            }
+          })
+          return el
+        })
 
         console.log(resp.organigrama)
         return {organigrama:resp.organigrama,tags:resp.tags}

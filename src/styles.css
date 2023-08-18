@@ -28,13 +28,15 @@ body {
 }
 
 .field_0 {
+    font-family: Cambria;
     font-family: Impact;
     text-transform: uppercase;
-    fill: #ac2222;
+    fill: #000000;
+    text-anchor: middle; 
 }
 
 .field_1 {
-    font-family: Cambria;
+    font-family: Arial;
     text-transform: uppercase;
     fill: #0c0a0a;
     text-anchor: middle; 
@@ -44,20 +46,34 @@ body {
   
 
 .node.no-user rect {
-    fill: #F25C54;
+    fill: #000000;
 }
 
 .node.no-user text {
     fill: rgb(51, 41, 41);
 }
 
-/* .node.item rect {
+.node.item rect {
     fill: #DDE2CD;
 }
 .node.eventual rect {
     fill: #93CDDD;
-} */
-
+}  
+.node.ascenso rect {
+    fill: #B7FD71;
+}
+.node.creacion rect {
+    fill: #799540;
+} 
+.node.reubicacion rect {
+    fill: #FFFF00;
+}
+.node.descenso rect {
+    fill: #F2DCDA;
+} 
+.node.eliminacion rect {
+    fill: #FF0000;
+} 
   
     
 
