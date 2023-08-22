@@ -12,6 +12,7 @@ import { OfficerDialogComponent } from './dialogs/officer-dialog/officer-dialog.
 import { LevelsComponent } from './pages/levels/levels.component';
 import { LevelDialogComponent } from './dialogs/level-dialog/level-dialog.component';
 import { SalaryComponent } from './pages/salary/salary.component';
+import { BudgetaryComponent } from './pages/budgetary/budgetary.component';
 
 
 
@@ -25,6 +26,7 @@ import { SalaryComponent } from './pages/salary/salary.component';
     LevelsComponent,
     LevelDialogComponent,
     SalaryComponent,
+    BudgetaryComponent,
     
   ],
   imports: [
