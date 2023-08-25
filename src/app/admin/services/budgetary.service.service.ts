@@ -13,7 +13,7 @@ export class BudgetaryService{
   get() {
     return this.http.get<{ budgetarys: any[], length: number }>(`${base_url}/budgetarys`).pipe(
       map(resp => {
-        return { budgetarys: resp.budgetarys, length: resp.length }
+        return { budgetary: resp.budgetarys, length: resp.length }
       })
     )
   }

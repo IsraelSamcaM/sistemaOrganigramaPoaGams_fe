@@ -1,17 +1,17 @@
-<h2 mat-dialog-title>{{data?'EDICION':'CREACION'}} NIVEL</h2>
+<h2 mat-dialog-title>{{data?'EDICION':'CREACION'}} PARTIDA PRESUPUESTARIA</h2>
 <mat-dialog-content class="mat-typography">
-            <form [formGroup]="FormLevel">
+            <form [formGroup]="FormBudgetary">
                 <div class="row">
                     <div class="col-sm-6">
                         <mat-form-field class="example-full-width">
                             <mat-label>Nivel</mat-label>
-                            <input formControlName="nivel" matInput>
+                            <input formControlName="codigo" matInput>
                         </mat-form-field>
                     </div>
                     <div class="col-sm-6">
                         <mat-form-field class="example-full-width">
                             <mat-label>Sueldo</mat-label>
-                            <input formControlName="sueldo" matInput>
+                            <input formControlName="nombrePartida" matInput>
                         </mat-form-field>
                     </div>
 
@@ -23,28 +23,28 @@
                             <div class="col-sm-6">
                                 <mat-form-field appearance="fill" class="example-full-width">
                                     <mat-label>CNS</mat-label>
-                                    <input formControlName="cajaSalud" matInput placeholder="0.1">
+                                    <input formControlName="fuenteFinanciamiento" matInput placeholder="0.1">
                                 </mat-form-field>
                             </div>  
                 
                             <div class="col-sm-6">
                                 <mat-form-field appearance="fill" class="example-full-width">
                                     <mat-label>Solidario</mat-label>
-                                    <input formControlName='solidario' matInput placeholder="0.03">
+                                    <input formControlName='organismoFinanciador' matInput placeholder="0.03">
                                 </mat-form-field>
                             </div>
         
                             <div class="col-sm-6">
                                 <mat-form-field appearance="fill" class="example-full-width">
                                     <mat-label>Profesional</mat-label>
-                                    <input formControlName='profecional' matInput placeholder="0.0171">
+                                    <input formControlName='tipoGasto' matInput placeholder="0.0171">
                                 </mat-form-field>
                             </div>
         
                             <div class="col-sm-6">
                                 <mat-form-field appearance="fill" class="example-full-width">
                                     <mat-label>Pro Vivienda</mat-label>
-                                    <input formControlName='proVivienda' matInput placeholder="0.02">
+                                    <input formControlName='objetivo' matInput placeholder="0.02">
                                 </mat-form-field>
                             </div>
                             
@@ -57,6 +57,6 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
-    <button mat-raised-button color="primary" mat-button [disabled]="FormLevel.invalid"
+    <button mat-raised-button color="primary" mat-button [disabled]="FormBudgetary.invalid"
         (click)="guardar()">Guardar</button>
 </mat-dialog-actions>

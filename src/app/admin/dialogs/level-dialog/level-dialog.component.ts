@@ -11,13 +11,11 @@ import { Component , Inject} from '@angular/core';
 })
 export class LevelDialogComponent {
   levels: any[] = []
-  dependentJobs: any[] = []
-  tipoContrato: string
   FormLevel: FormGroup = this.fb.group({
     nivel: ['', Validators.required],
     sueldo: ['', Validators.required],
     cajaSalud: ['', Validators.required],
-    solidario: [false, Validators.required],
+    solidario: ['', Validators.required],
     profecional: ['', Validators.required],
     proVivienda: ['', Validators.required],
   }); 
@@ -28,8 +26,6 @@ export class LevelDialogComponent {
     public dialogRef: MatDialogRef<LevelDialogComponent>,
     private usuariosService: LevelService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-
-
   }
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ import { LevelsComponent } from './pages/levels/levels.component';
 import { LevelDialogComponent } from './dialogs/level-dialog/level-dialog.component';
 import { SalaryComponent } from './pages/salary/salary.component';
 import { BudgetaryComponent } from './pages/budgetary/budgetary.component';
+import { BudgetaryDialogComponent } from './dialogs/budgetary-dialog/budgetary-dialog.component';
 
 
 
@@ -27,6 +28,7 @@ import { BudgetaryComponent } from './pages/budgetary/budgetary.component';
     LevelDialogComponent,
     SalaryComponent,
     BudgetaryComponent,
+    BudgetaryDialogComponent,
     
   ],
   imports: [

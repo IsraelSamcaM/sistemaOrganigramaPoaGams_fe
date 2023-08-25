@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BudgetaryService} from '../../services/budgetary.service.service';
 import { MatDialog } from '@angular/material/dialog';
-import { LevelDialogComponent } from '../../dialogs/level-dialog/level-dialog.component';
+import { BudgetaryDialogComponent } from '../../dialogs/budgetary-dialog/budgetary-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -11,9 +11,9 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './budgetary.component.html',
   styleUrls: ['./budgetary.component.css']
 })
-export class BudgetaryComponent {
+export class BudgetaryComponent implements AfterViewInit {
   text: string = ''
-  displayedColumns = ['codigo','nombrePartida','fuenteFinanciamiento','organismoFinanciador']
+  displayedColumns = ['codigo' ,'nombre','fuenteFinanciamiento','organismoFinanciador','options']
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,11 +29,11 @@ export class BudgetaryComponent {
 
   Get() {
       this.BudgetaryService.get().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data.budgetarys)
+        this.dataSource = new MatTableDataSource(data.budgetary)
         this.dataSource.paginator = this.paginator;
-      })
-    
+      })    
   }
+
   applyFilter(event: Event) {
     this.text = (event.target as HTMLInputElement).value;
     this.Get()
@@ -43,7 +43,7 @@ export class BudgetaryComponent {
     this.Get()
   }
   Edit(item: any) {
-    const dialogRef = this.dialog.open(LevelDialogComponent, {
+    const dialogRef = this.dialog.open(BudgetaryDialogComponent, {
       width: '800px',
       data: item
     });
@@ -57,7 +57,7 @@ export class BudgetaryComponent {
     });
   }
   add() {
-    const dialogRef = this.dialog.open(LevelDialogComponent, {
+    const dialogRef = this.dialog.open(BudgetaryDialogComponent, {
       width: '800px'
     });
     dialogRef.afterClosed().subscribe((result: any) => {

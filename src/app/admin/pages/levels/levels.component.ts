@@ -14,7 +14,7 @@ import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-levels',
-  templateUrl: './levels.component.html',
+  templateUrl: './levels.component.html', 
   styleUrls: ['./levels.component.css']
 })
 export class LevelsComponent implements AfterViewInit {
