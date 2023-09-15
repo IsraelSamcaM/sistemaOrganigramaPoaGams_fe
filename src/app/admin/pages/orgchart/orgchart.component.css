@@ -1,13 +1,31 @@
-.example-large-box {
-  height: 80vh;
+:host ::ng-deep {
+  display: block;
+  height: inherit;
+  width: inherit;
 }
-
-[data-n-id] rect {
-  fill: #016e25;
+:host ::ng-deep .cardContainer {
+  height: 100;  /*100*/
+  width: 150;   /*150*/
+  display: block;
 }
-
-.field_0 {
-  font-family: Impact;
-  text-transform: uppercase;
-  fill: #6d2020;
+:host ::ng-deep .cardContainer .name {
+  font-size: 10px;
+}
+:host ::ng-deep .cardContainer label {
+  display: block;
+  text-align: center;
+  font-size: 9px;
+  margin-top: 6px;
+  margin-bottom: 4px;
+}
+:host ::ng-deep .linkMidpoint ellipse {
+  fill: white;
+  stroke: black;
+  stroke-width: 1;
+}
+:host ::ng-deep .linkMidpoint text {
+  stroke: transparent;
+  fill: black;
+  text-anchor: middle;
+  font-size: 10px;
 }

@@ -14,6 +14,9 @@ import { LevelDialogComponent } from './dialogs/level-dialog/level-dialog.compon
 import { SalaryComponent } from './pages/salary/salary.component';
 import { BudgetaryComponent } from './pages/budgetary/budgetary.component';
 import { BudgetaryDialogComponent } from './dialogs/budgetary-dialog/budgetary-dialog.component';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { OrgcharComponent } from './component/orgchar/orgchar.component';
+
 
 
 
@@ -29,7 +32,9 @@ import { BudgetaryDialogComponent } from './dialogs/budgetary-dialog/budgetary-d
     SalaryComponent,
     BudgetaryComponent,
     BudgetaryDialogComponent,
-    
+    OrgcharComponent,
+
+     
   ],
   imports: [
     CommonModule,
@@ -37,7 +42,8 @@ import { BudgetaryDialogComponent } from './dialogs/budgetary-dialog/budgetary-d
     HttpClientModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxGraphModule
   ]
 })
 export class AdminModule { }

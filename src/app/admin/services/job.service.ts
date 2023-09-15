@@ -39,6 +39,16 @@ export class JobService {
       })
     )
   }
+  
+  //para los que no estas presentes en algun organigrana
+  getNoOrganigram() {
+    return this.http.get<{ jobs: any[], length: number }>(`${base_url}/jobs/noOrganigram`).pipe(
+      map(resp => {
+        return { jobs: resp.jobs, length: resp.length }
+      })
+    )
+  }
+
 //metodo de escala salarial 
   getEscalaSalarial() {
     return this.http.get<{ salarios: any[], length: number }>(`${base_url}/jobs/escala`).pipe(
@@ -124,11 +134,10 @@ export class JobService {
   getOrganization() {
     return this.http.get<{organigrama:any[],tags:any}>(`${base_url}/jobs/organization/data`).pipe(
       map(resp => {
+        console.log(resp)
         const newOrg=resp.organigrama.map(el => {         
           el.data.forEach((item: any, index: number) => {
-            // if (item.name === 'Sin funcionario') {
-            //   el.data[index].tags = ["no-user"];
-            // }
+           
          
             if(item.estado =="ITEM"){
               el.data[index].tags=['item']

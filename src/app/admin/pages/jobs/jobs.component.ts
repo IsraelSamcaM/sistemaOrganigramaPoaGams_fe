@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { JobService } from '../../services/job.service';
+import { LevelService } from '../../services/level.service';
 import { MatDialog } from '@angular/material/dialog';
 import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
@@ -14,16 +15,19 @@ export class JobsComponent implements AfterViewInit {
   text: string = ''
   displayedColumns = ['nombre','secretaria','tipoContrato','nivel_id.nivel','options']
   dataSource = new MatTableDataSource<any>([]);
+  niveles: any[] = []
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private cargoService: JobService,
+    private levelService: LevelService,
     public dialog: MatDialog,
   ) {
     this.Get()
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.levelService.get().subscribe(data=>{ this.niveles=data.levels})
   }
 
   Get() {
@@ -73,8 +77,15 @@ export class JobsComponent implements AfterViewInit {
     this.text = (event.target as HTMLInputElement).value;
     this.Get()
   }
+
   cancelSearch() {
     this.text = ''
     this.Get()
   }
+
+  nivelSeleccionado(event: any) {
+    const selectedValue = event.value;
+    console.log('Nivel seleccionado:', selectedValue);
+  }
+
 }

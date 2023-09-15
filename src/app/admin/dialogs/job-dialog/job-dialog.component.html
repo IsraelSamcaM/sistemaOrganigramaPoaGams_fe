@@ -23,16 +23,18 @@
                         </mat-form-field>
                     </div>  
         
-                    <div class="col-sm-4">
-                        <mat-form-field>
-                            <mat-label>Nivel</mat-label>
-                            <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>
-                              <mat-option *ngFor="let lev of niveles" [value]="lev._id">
-                                {{lev.nivel}}
-                              </mat-option>
-                            </mat-select>
-                          </mat-form-field>
-                    </div>  
+                        <div class="col-sm-4">
+                            <mat-form-field>
+                                <mat-label>Nivel</mat-label>
+                                <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>
+                                    
+                                    <mat-option *ngFor="let lev of niveles" [value]="lev._id">
+                                        {{lev.nivel}}
+                                    </mat-option>
+                                    
+                                </mat-select>
+                            </mat-form-field>
+                        </div>  
                     
                     <div class="col-sm-4">
                         <mat-radio-group ng model formControlName="tipoContrato">

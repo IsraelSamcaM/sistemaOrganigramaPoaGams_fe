@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminModule } from './admin/admin.module';
 import { MaterialModule } from './material/material.module';
 import { HomeComponent } from './home/home.component';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     MaterialModule,
     AdminModule,
+    NgxGraphModule
   ],
   providers: [],
   bootstrap: [AppComponent]
