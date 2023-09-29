@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobService } from '../../services/job.service';
 import { LevelService } from '../../services/level.service';
+import { BudgetaryService} from '../../services/budgetary.service.service'
 
 @Component({
   selector: 'app-job-dialog',
@@ -16,6 +17,7 @@ export class JobDialogComponent {
   dependentJobs: any[] = []
   tipoContrato: string
   niveles: any[] = []
+  partidas: any[] = []
   
   FormJob: FormGroup = this.fb.group({
     nombre: ['', Validators.required],
@@ -25,6 +27,7 @@ export class JobDialogComponent {
     estado: [false, Validators.required],
     tipoContrato: ['', Validators.required]   
   }); 
+
   FormJobDetail: FormGroup = this.fb.group({
     partidaPresupuestaria: ['', Validators.required],
     objetivoPuesto: ['', Validators.required],
@@ -39,6 +42,7 @@ export class JobDialogComponent {
   constructor(
     private cargoService: JobService,
     private levelService: LevelService,
+    private BudgetaryService: BudgetaryService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<JobDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -46,11 +50,17 @@ export class JobDialogComponent {
 
   }
   ngOnInit(): void {
+
     console.log(this.data)
+    
     this.levelService.get().subscribe(data=>{
       this.niveles=data.levels          
     })
     
+    this.BudgetaryService.get().subscribe(data=>{
+      this.partidas=data.budgetary          
+    })
+
     if (this.data) {
       const { nivel_id, ...values } = this.data
        ///this.FormJob.patchValue(this.data)
@@ -62,8 +72,6 @@ export class JobDialogComponent {
 
 
   }
-
-  
 
   searchDependents(text: string) {
     this.cargoService.searchSuperior(text).subscribe(jobs => {
@@ -106,6 +114,16 @@ export class JobDialogComponent {
   nivelSeleccionado(event: any) {
     const selectedValue = event.value;
     console.log('Nivel seleccionado:', selectedValue);
+  }
+
+  get isFormValid() {
+    if (this.FormJob.get('tipoContrato')?.value === 'ITEM') {
+      if (this.FormJob.valid) return true
+    }
+    else if (this.FormJob.get('tipoContrato')?.value === 'CONTRATO') {
+      if (this.FormJob.valid && this.FormJobDetail.valid) return true
+    }
+    return false
   }
 
 }

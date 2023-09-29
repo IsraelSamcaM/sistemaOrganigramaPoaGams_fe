@@ -23,18 +23,16 @@
                         </mat-form-field>
                     </div>  
         
-                        <div class="col-sm-4">
-                            <mat-form-field>
-                                <mat-label>Nivel</mat-label>
-                                <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>
-                                    
+                    <div class="col-sm-4">
+                        <mat-form-field>
+                            <mat-label>Nivel</mat-label>
+                             <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>                                
                                     <mat-option *ngFor="let lev of niveles" [value]="lev._id">
                                         {{lev.nivel}}
-                                    </mat-option>
-                                    
-                                </mat-select>
-                            </mat-form-field>
-                        </div>  
+                                    </mat-option>                                   
+                            </mat-select>
+                        </mat-form-field>
+                    </div>  
                     
                     <div class="col-sm-4">
                         <mat-radio-group ng model formControlName="tipoContrato">
@@ -59,8 +57,9 @@
                             <mat-chip-option [style.background]="'rgb(121, 149, 64)'" value="CREACION">Creacion</mat-chip-option>
                             <mat-chip-option [style.background]="'rgb(255, 255, 0)'" value="REUBICACION">Reubicacion</mat-chip-option>
                             <mat-chip-option [style.background]="'rgb(242, 220, 218)'" value="DESCENSO">Descenso</mat-chip-option>
+                            <mat-chip-option [style.background]="'rgb(255, 128, 0)'" value="DENOMINACION">Denominacion</mat-chip-option>
                             <mat-chip-option [style.background]="'rgb(255, 0, 0)'" value="ELIMINACION">Eliminacion</mat-chip-option>
-                          </mat-chip-listbox>
+                        </mat-chip-listbox>
                     </div>
                 </div>                   
                 
@@ -96,6 +95,17 @@
                         <mat-form-field class="example-full-width">
                             <mat-label>Partida Presupuestaria</mat-label>
                             <input formControlName="partidaPresupuestaria" matInput>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <mat-form-field>
+                            <mat-label>Partidas</mat-label>
+                             <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>                                
+                                    <mat-option *ngFor="let lev of partidas" [value]="lev._id">
+                                        {{lev.nivel}}
+                                    </mat-option>                                   
+                            </mat-select>
                         </mat-form-field>
                     </div>
                 

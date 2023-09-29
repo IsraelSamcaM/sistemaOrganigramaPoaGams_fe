@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BudgetaryService } from '../../services/budgetary.service.service';
 
@@ -9,7 +9,10 @@ import { BudgetaryService } from '../../services/budgetary.service.service';
   styleUrls: ['./budgetary-dialog.component.css']
 })
 export class BudgetaryDialogComponent {
+ 
   budgetarys: any[] = []
+  
+
   FormBudgetary: FormGroup = this.fb.group({
     codigo: ['', Validators.required],
     nombrePartida: ['', Validators.required],
@@ -17,7 +20,7 @@ export class BudgetaryDialogComponent {
     organismoFinanciador: ['', Validators.required],
     tipoGasto: ['', Validators.required],
     objetivo: ['', Validators.required],
-    activo: ['', Validators.required],
+    activo: [false, Validators.required],
   }); 
   
   constructor(

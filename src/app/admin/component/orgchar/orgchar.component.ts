@@ -15,7 +15,7 @@ export class OrgcharComponent implements OnChanges{
   public layoutSettings = {
   orientation: 'TB'
   };
-  public curve: any = shape.curveLinear;
+  public curve: any = shape.curveStepAfter;//curveStepAfter
   public layout: Layout = new DagreNodesOnlyLayout();
 
   public getStyles(node: Node): any {

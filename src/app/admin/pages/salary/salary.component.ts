@@ -21,6 +21,9 @@ export class SalaryComponent {
   displayedColumns5 = ['DatosGenerales','TotalItems','TotalSueldoMensual','TotalSueldoAnual','TotalAguinaldo','TotalCNS','TotalAFP','TotalProVivienda','TotalAporteSolidario','TotalAportes','TotalTotal' ]
   displayedColumns6 = ['_id','cantidadCargos','cantidadItem','cantidadContrato','totalSueldos','totalSueldoAnual','aportes','aguinaldos','total']
   displayedColumns7 = ['nombre','tipoContrato','nivel','sueldoMensual','sueldoAnual','Aguinaldo','CNS','AFP','proVivienda','AporteSolidario','TotalAportes','Total']
+  displayedColumns8 = ['nombre','tipoContrato','estado','nivel','sueldoMensual','sueldoAnual','Aguinaldo','CNS','AFP','proVivienda','AporteSolidario','TotalAportes','Total']
+  displayedColumns9 = ['partidaPresupuestaria', 'estado','objetivoPuesto','secretaria','nivel','denominacionPuesto','nombre','tipoContrato','sueldoMensual','tipoGasto'
+                        ,'fuenteFinanciamiento','organismoFinanciador','duracionContrato','casos','sueldoMensual','sueldoAnual','Aguinaldo','CNS','AFP','proVivienda','AporteSolidario','TotalAportes','Total']
 
   dataSource = new MatTableDataSource<any>([]);
   dataSource2 = new MatTableDataSource<any>([]);
@@ -29,9 +32,11 @@ export class SalaryComponent {
   dataSource5 = new MatTableDataSource<any>([]);
   dataSource6 = new MatTableDataSource<any>([]);  
   dataSource7 = new MatTableDataSource<any>([]);
+  dataSource8 = new MatTableDataSource<any>([]);
 
   @ViewChild('paginatorParPre') paginatorParPre: MatPaginator;
   @ViewChild('paginatorItems') paginatorItems: MatPaginator;
+  @ViewChild('paginatorEventuales') paginatorEventuales: MatPaginator;
 
   constructor(  
     private cargoService: JobService,
@@ -44,6 +49,7 @@ export class SalaryComponent {
     this.GetTotalItemsSalariosGlobal()
     this.GetSecretariasGlobal()
     this.GetFullItems()
+    this.GetFullEventuales()
   }
   ngAfterViewInit() {
     
@@ -92,6 +98,14 @@ export class SalaryComponent {
       this.dataSource7.paginator = this.paginatorItems;
     })
   }
+
+  /**/ 
+  GetFullEventuales() {
+      this.cargoService.getFullEventuales().subscribe(data => {
+        this.dataSource8 = new MatTableDataSource(data.fullEventuales)
+        this.dataSource8.paginator = this.paginatorEventuales;
+    })
+  }   
 
   
   exportToExcel(dataSources: MatTableDataSource<any>[], displayedColumnsArray: string[][], fileNames: string[]): void {

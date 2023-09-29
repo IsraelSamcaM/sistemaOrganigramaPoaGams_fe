@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./budgetary.component.css']
 })
 export class BudgetaryComponent implements AfterViewInit {
+  
   text: string = ''
   displayedColumns = ['codigo' ,'nombre','fuenteFinanciamiento','organismoFinanciador','options']
   dataSource = new MatTableDataSource<any>([]);
@@ -38,10 +39,12 @@ export class BudgetaryComponent implements AfterViewInit {
     this.text = (event.target as HTMLInputElement).value;
     this.Get()
   }
+
   cancelSearch() {
     this.text = ''
     this.Get()
   }
+  
   Edit(item: any) {
     const dialogRef = this.dialog.open(BudgetaryDialogComponent, {
       width: '800px',
