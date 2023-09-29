@@ -9,9 +9,9 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-4">
-                        <mat-chip-listbox ng model formControlName="activo">
-                            <mat-chip-option color="accent" value = 'true'> Habilitar</mat-chip-option>
-                            <mat-chip-option color="accent" value = "false"> Deshabilitar</mat-chip-option>
+                        <mat-chip-listbox formControlName="activo">
+                            <mat-chip-option color="primary" [value] = 'true'> Habilitar</mat-chip-option>
+                            <mat-chip-option color="warn" [value] = 'false'> Deshabilitar</mat-chip-option>
                         </mat-chip-listbox>
                     </div>
                     <div class="col-sm-12">
