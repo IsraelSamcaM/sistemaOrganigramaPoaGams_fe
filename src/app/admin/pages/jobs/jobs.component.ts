@@ -13,20 +13,28 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class JobsComponent implements AfterViewInit {
   text: string = ''
-  level: string = ''
-  estado: string = ''
+  level: string = 'noneLevel'
+  estado: string = 'noneEstado'
   displayedColumns = ['nombre','secretaria','tipoContrato','nivel_id.nivel','estado','superior','options']
   dataSource = new MatTableDataSource<any>([]);
   niveles: any[] = []
+  filterEstado = "noneEstado"
+  filterLevel = "noneLevel"
+  
+  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private cargoService: JobService,
     private levelService: LevelService,
     public dialog: MatDialog,
-  ) {
+  ) 
+  
+  {
     this.Get()
+    
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.levelService.get().subscribe(data=>{ this.niveles=data.levels})
@@ -47,28 +55,15 @@ export class JobsComponent implements AfterViewInit {
     }
   }
 
-  GetJobsLevel(){
-    if(this.level !== 'noneLevel'){
-      this.cargoService.search(this.level).subscribe(data => {
-        this.dataSource = new MatTableDataSource(data.jobs)
-        this.dataSource.paginator = this.paginator;
-      })
-    }
-    else {
-      this.cargoService.get().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data.jobs)
-        this.dataSource.paginator = this.paginator;
-      })
-    }
-  }
 
   GetJobsLevelEstado(){
-    if(this.level !== 'noneLevel'){
+    if(this.level !== 'noneLevel' || this.estado !== 'noneEstado'){
       this.cargoService.searchWithFullCombo(this.level, this.estado).subscribe(data => {
         this.dataSource = new MatTableDataSource(data.jobs)
         this.dataSource.paginator = this.paginator;
       })
     }
+    
     else {
       this.cargoService.get().subscribe(data => {
         this.dataSource = new MatTableDataSource(data.jobs)

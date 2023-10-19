@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>{{data?'EDICION':'CREACION'}} DEPENDENCIAS </h2>
+<mat-dialog-content class="mat-typography">
+            <form [formGroup]="FormDependence">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Nombre</mat-label>
+                            <input formControlName="nombre" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Sigla</mat-label>
+                            <input formControlName="sigla" matInput>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="card w-100">
+                    <div class="card-body">
+                      <h4 class="card-title"> Extras</h4>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Depende</mat-label>
+                                    <input formControlName="depende_de" matInput>
+                                </mat-form-field>
+                            </div>  
+                
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Encargado</mat-label>
+                                    <input formControlName='encargado' matInput>
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Estado</mat-label>
+                                    <input formControlName='estado' matInput>
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="col-sm-6">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Tipo</mat-label>
+                                    <input formControlName='tipo' matInput>
+                                </mat-form-field>
+                            </div>                          
+                        </div>
+                    </div>
+                  </div>
+                             
+            </form>
+         
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-flat-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" mat-button [disabled]="FormDependence.invalid"
+        (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

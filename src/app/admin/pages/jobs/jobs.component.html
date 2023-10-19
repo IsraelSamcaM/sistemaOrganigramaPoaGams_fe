@@ -14,34 +14,38 @@
         <div class="col-sm-7">
             <mat-form-field class="example-full-width">
                 <mat-label>Buscar cargos</mat-label>
-                <input matInput [(ngModel)]="text" (keyup)="applyFilter($event)" placeholder="Nombre Cargo / Secretaria" #input>
-                <button *ngIf="text" matSuffix mat-icon-button aria-label="Clear" (click)="cancelSearch()">
+                <input matInput [(ngModel)]="text" (keyup)="applyFilter($event)" placeholder="Nombre Cargo / Secretaria" #input 
+                       [disabled]="filterLevel !== 'noneLevel' || filterEstado !== 'noneEstado'">
+                <button *ngIf="text" matSuffix mat-icon-button aria-label="Clear" (click)="cancelSearch()" [disabled]="filterLevel !== 'noneLevel' || filterEstado !== 'noneEstado'">
                     <mat-icon>close</mat-icon>
                 </button>
-            </mat-form-field>   
+            </mat-form-field>
         </div>
         <div class="col-sm-2">
             <mat-form-field>
                 <mat-label>Nivel</mat-label>
-                <mat-select (selectionChange)="nivelSeleccionado($event)">
-                <mat-option value="noneLevel">-- None --</mat-option>
-                <mat-option *ngFor="let lev of niveles" [value]="lev._id">
-                    {{lev.nivel}}
-                </mat-option>
+                <mat-select (selectionChange)="nivelSeleccionado($event)" [(ngModel)]="filterLevel">
+                    <mat-option value="noneLevel">Todos</mat-option>
+                    <mat-option *ngFor="let lev of niveles" [value]="lev._id">
+                        {{lev.nivel}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
         <div class="col-sm-3">
             <mat-form-field>
                 <mat-label>Estado</mat-label>
-                <mat-select (selectionChange)="estadoSelecionado($event)">
-                    <mat-option value="noneEstado">-- None --</mat-option>
+                <mat-select (selectionChange)="estadoSelecionado($event)" [(ngModel)]="filterEstado">                  
+                    <mat-option value="noneEstado">Todos</mat-option>
                     <mat-option value="habilitado">Habilitado</mat-option>
                     <mat-option value="deshabilitado">Deshabilitado</mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
         </div>
     </div>
+    
+
+    
     
     <div class="example-container mat-elevation-z8">
         <div class="example-table-container">

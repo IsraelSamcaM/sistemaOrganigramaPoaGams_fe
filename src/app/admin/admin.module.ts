@@ -16,6 +16,8 @@ import { BudgetaryComponent } from './pages/budgetary/budgetary.component';
 import { BudgetaryDialogComponent } from './dialogs/budgetary-dialog/budgetary-dialog.component';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { OrgcharComponent } from './component/orgchar/orgchar.component';
+import { DependencesDialogComponent } from './dialogs/dependences-dialog/dependences-dialog.component';
+import { DependencesComponent } from './pages/dependences/dependences.component';
 
 
 
@@ -33,6 +35,8 @@ import { OrgcharComponent } from './component/orgchar/orgchar.component';
     BudgetaryComponent,
     BudgetaryDialogComponent,
     OrgcharComponent,
+    DependencesDialogComponent,
+    DependencesComponent,
 
      
   ],
