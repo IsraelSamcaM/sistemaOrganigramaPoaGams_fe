@@ -58,6 +58,7 @@ export class OfficerDialogComponent {
     }   
   }
 
+
   searchJob(value: any) {
     this.cargoService.searchJobForOfficer(value).subscribe(data => {
       this.availableJobs = data
@@ -66,6 +67,7 @@ export class OfficerDialogComponent {
   selectJob(job: any) {
     this.Form_Funcionario.get('cargo')?.setValue(job._id)
   }
+  
   removeJob() {
     if (this.noJob) {
       this.Form_Funcionario.removeControl('cargo')

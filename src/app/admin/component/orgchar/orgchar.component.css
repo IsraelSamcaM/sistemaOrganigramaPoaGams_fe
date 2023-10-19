@@ -1,0 +1,13 @@
+.red {
+    color: red; 
+}
+
+.name, div.red label, label {
+    font-weight: bold; 
+    padding: 2px; 
+    font-size: 10px;
+}
+
+
+
+

@@ -11,25 +11,35 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-7">
             <mat-form-field class="example-full-width">
                 <mat-label>Buscar cargos</mat-label>
-                <input matInput [(ngModel)]="text" (keyup)="applyFilter($event)" placeholder="Nombre del cargo" #input>
+                <input matInput [(ngModel)]="text" (keyup)="applyFilter($event)" placeholder="Nombre Cargo / Secretaria" #input>
                 <button *ngIf="text" matSuffix mat-icon-button aria-label="Clear" (click)="cancelSearch()">
                     <mat-icon>close</mat-icon>
                 </button>
-            </mat-form-field>
+            </mat-form-field>   
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
             <mat-form-field>
                 <mat-label>Nivel</mat-label>
-                <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>
+                <mat-select (selectionChange)="nivelSeleccionado($event)">
                 <mat-option value="noneLevel">-- None --</mat-option>
                 <mat-option *ngFor="let lev of niveles" [value]="lev._id">
                     {{lev.nivel}}
                 </mat-option>
                 </mat-select>
             </mat-form-field>
+        </div>
+        <div class="col-sm-3">
+            <mat-form-field>
+                <mat-label>Estado</mat-label>
+                <mat-select (selectionChange)="estadoSelecionado($event)">
+                    <mat-option value="noneEstado">-- None --</mat-option>
+                    <mat-option value="habilitado">Habilitado</mat-option>
+                    <mat-option value="deshabilitado">Deshabilitado</mat-option>
+                </mat-select>
+              </mat-form-field>
         </div>
     </div>
     
@@ -47,7 +57,7 @@
                 </ng-container>
                 
                 <ng-container matColumnDef="tipoContrato">
-                    <th mat-header-cell *matHeaderCellDef> Estado </th>
+                    <th mat-header-cell *matHeaderCellDef> Tipo </th>
                     <td mat-cell *matCellDef="let element"> {{element?.tipoContrato}} </td>
                 </ng-container>
 
@@ -55,7 +65,31 @@
                     <th mat-header-cell *matHeaderCellDef> Nivel </th>
                     <td mat-cell *matCellDef="let element"> {{element?.nivel_id.nivel}} </td>
                 </ng-container>
-                
+
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef> Estado </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span *ngIf="element?.estado !== 'ELIMINACION' ">
+                        <span class="badge bg-success">Habilitado</span>
+                      </span>
+                      <span *ngIf="element?.estado === 'ELIMINACION' ">
+                        <span class="badge bg-danger">Deshabilitado</span>
+                      </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="superior">
+                    <th mat-header-cell *matHeaderCellDef> Organigrama </th>
+                    <td mat-cell *matCellDef="let element">
+                      <ng-container *ngIf="element?.isRoot || element?.superior !== null; else noCase">
+                        <span class="badge bg-success">SI</span>
+                      </ng-container>
+                      <ng-template #noCase>
+                        <span class="badge bg-danger">NO</span>
+                      </ng-template>
+                    </td>
+                </ng-container>
+
               <ng-container matColumnDef="options">
                     <th mat-header-cell *matHeaderCellDef> </th>
                     <td mat-cell *matCellDef="let element">

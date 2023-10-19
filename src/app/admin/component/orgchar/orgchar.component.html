@@ -1,10 +1,10 @@
 <ngx-graph
-  [view]="[1500, 900]"
+  [view]="[1500, 655]"
   [links]="links"
   [nodes]="nodes"
   [curve]="curve"
   [layout]="layout"
-  [nodeWidth]="150"
+  [nodeWidth]="200"
   [nodeHeight]="100"
   [layoutSettings]="layoutSettings"
   [enableZoom]="true"
@@ -18,10 +18,12 @@
 
   <ng-template #nodeTemplate let-node>
     <svg:g class="node" xmlns="http://www.w3.org/2000/xhtml" width="200" height="150">
-      <svg:foreignObject width="150" height="150">
+      <svg:foreignObject width="200" height="150">
         <xhtml:div class="cardContainer" xmlns="http://www.w3.org/1999/xhtml" [ngStyle]="getStyles(node)">
           <label class="name">{{ node.label }}</label>
-          <label>{{ node.data.nombre }}</label>
+          <div [ngClass]="{'red': node.data.nombre === 'Sin funcionario'}">
+            <label>{{ node.data.nombre }}</label>
+          </div>
           <label>{{ node.data.nivel }}</label>
         </xhtml:div>
       </svg:foreignObject>

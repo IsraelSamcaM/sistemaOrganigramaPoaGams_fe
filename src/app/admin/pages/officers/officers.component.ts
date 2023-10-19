@@ -26,6 +26,7 @@ export class OfficersComponent {
   ngOnInit(): void {
     this.Get()
   }
+  
   Get() {
     if (this.text !== '') {
       this.funcionariosService.search(this.text).subscribe(data => {

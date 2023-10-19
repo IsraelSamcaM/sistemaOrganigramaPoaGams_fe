@@ -12,4 +12,13 @@ mat-list {
 
 
 
-  
+/* Estilo para la lista de chips */
+.mat-chip-listbox {
+  display: flex;
+  flex-direction: column; /* Cambia la dirección del flujo a columnas */
+}
+
+/* Estilo para los chips individuales (opciones) */
+.mat-chip-option {
+  margin-bottom: 10px; /* Espacio entre los chips (opciones) */
+}

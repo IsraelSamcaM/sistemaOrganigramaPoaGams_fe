@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobService } from '../../services/job.service';
 import { LevelService } from '../../services/level.service';
@@ -13,6 +13,8 @@ import { BudgetaryService} from '../../services/budgetary.service.service'
 })
 
 export class JobDialogComponent {
+  availableJobs: any[] = []
+  noJob: boolean = false
   jobs: any[] = []
   dependentJobs: any[] = []
   tipoContrato: string
@@ -25,14 +27,16 @@ export class JobDialogComponent {
     nivel_id: ['', Validators.required],
     isRoot: [false, Validators.required],
     estado: [false, Validators.required],
-    tipoContrato: ['', Validators.required]   
+    tipoContrato: ['', Validators.required],
+    superior: ['', Validators.required]
+
   }); 
 
   FormJobDetail: FormGroup = this.fb.group({
     partidaPresupuestaria: ['', Validators.required],
     objetivoPuesto: ['', Validators.required],
     denominacionPuesto: ['', Validators.required],  
-    tipoGasto: [false, Validators.required],
+    tipoGasto: ['', Validators.required],
     casos: ['', Validators.required] ,
     fuenteFinanciamiento: ['', Validators.required],
     organismoFinanciador: ['', Validators.required],
@@ -62,12 +66,19 @@ export class JobDialogComponent {
     })
 
     if (this.data) {
-      const { nivel_id, ...values } = this.data
+      const { nivel_id,superior, ...values } = this.data
        ///this.FormJob.patchValue(this.data)
        this.cargoService.getDependentsOfSuperior(this.data._id).subscribe(jobs => this.dependentJobs = jobs)
        this.FormJob.patchValue({ ...values, nivel_id: nivel_id._id })
        this.FormJobDetail.patchValue({ ... this.data.detalle_id})
        console.log(this.data)
+      if (!superior) {
+        this.noJob = true
+        this.FormJob.patchValue(values)
+      }
+      else {
+        this.FormJob.patchValue({ ...values, superior: superior._id })
+      }
      }
 
 
@@ -80,6 +91,7 @@ export class JobDialogComponent {
   }
 
   save() {
+    
     const newJob = {
       ...this.FormJob.value,
       dependents: this.dependentJobs.map(element => element._id)
@@ -91,6 +103,8 @@ export class JobDialogComponent {
     else {
       this.cargoService.add(newJob, this.FormJobDetail.value).subscribe(job => this.dialogRef.close(job))
     }
+
+
   }
 
   selectDependents(value: any) {
@@ -126,4 +140,23 @@ export class JobDialogComponent {
     return false
   }
 
+  searchJob(value: any) {
+    
+    this.cargoService.searchJobForOfficer(value).subscribe(data => {
+      this.availableJobs = data
+    })
+  }
+
+  selectJob(job: any) {
+    this.FormJob.get('superior')?.setValue(job._id)
+  }
+
+  removeJob() {
+    if (this.noJob) {
+      this.FormJob.removeControl('superior')
+    }
+    else {
+      this.FormJob.addControl('superior', new FormControl(this.data?.superior ? this.data.superior._id : '', Validators.required))
+    }
+  }
 }

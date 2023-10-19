@@ -13,7 +13,9 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class JobsComponent implements AfterViewInit {
   text: string = ''
-  displayedColumns = ['nombre','secretaria','tipoContrato','nivel_id.nivel','options']
+  level: string = ''
+  estado: string = ''
+  displayedColumns = ['nombre','secretaria','tipoContrato','nivel_id.nivel','estado','superior','options']
   dataSource = new MatTableDataSource<any>([]);
   niveles: any[] = []
 
@@ -32,7 +34,37 @@ export class JobsComponent implements AfterViewInit {
 
   Get() {
     if (this.text !== '') {
-      this.cargoService.search(this.text).subscribe(data => {
+      this.cargoService.searchWithText(this.text).subscribe(data => {
+        this.dataSource = new MatTableDataSource(data.jobs)
+        this.dataSource.paginator = this.paginator;
+      })
+    }
+    else {
+      this.cargoService.get().subscribe(data => {
+        this.dataSource = new MatTableDataSource(data.jobs)
+        this.dataSource.paginator = this.paginator;
+      })
+    }
+  }
+
+  GetJobsLevel(){
+    if(this.level !== 'noneLevel'){
+      this.cargoService.search(this.level).subscribe(data => {
+        this.dataSource = new MatTableDataSource(data.jobs)
+        this.dataSource.paginator = this.paginator;
+      })
+    }
+    else {
+      this.cargoService.get().subscribe(data => {
+        this.dataSource = new MatTableDataSource(data.jobs)
+        this.dataSource.paginator = this.paginator;
+      })
+    }
+  }
+
+  GetJobsLevelEstado(){
+    if(this.level !== 'noneLevel'){
+      this.cargoService.searchWithFullCombo(this.level, this.estado).subscribe(data => {
         this.dataSource = new MatTableDataSource(data.jobs)
         this.dataSource.paginator = this.paginator;
       })
@@ -47,7 +79,7 @@ export class JobsComponent implements AfterViewInit {
 
   Edit(item: any) {
     const dialogRef = this.dialog.open(JobDialogComponent, {
-      width: '800px',
+      width: '870px',
       data: item
     });
 
@@ -61,9 +93,10 @@ export class JobsComponent implements AfterViewInit {
       }
     });
   }
+
   add() {
     const dialogRef = this.dialog.open(JobDialogComponent, {
-      width: '800px'
+      width: '870px'
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
@@ -83,9 +116,19 @@ export class JobsComponent implements AfterViewInit {
     this.Get()
   }
 
+
+  estadoSelecionado(event: any){
+    const selectedValue = event.value;
+    this.estado = selectedValue
+    console.log('Estado seleccionado:', selectedValue);
+    this.GetJobsLevelEstado()
+  }
+
   nivelSeleccionado(event: any) {
     const selectedValue = event.value;
+    this.level = selectedValue
     console.log('Nivel seleccionado:', selectedValue);
+    this.GetJobsLevelEstado()
   }
 
 }

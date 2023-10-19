@@ -119,14 +119,31 @@ export class JobService {
       })
     )
   }
+
+  searchWithText(text: string) {
+    return this.http.get<{ jobs: any[], length: number }>(`${base_url}/jobs/search/${text}`).pipe(
+      map(resp => { 
+        return { jobs: resp.jobs, length: resp.length }
+      })
+    )
+  }
+
+  searchWithFullCombo(level: string, estado: string) {
+    return this.http.get<{ jobs: any[], length: number }>(`${base_url}/jobs/fullCombo/${level}/${estado}`).pipe(
+      map(resp => { 
+        return { jobs: resp.jobs, length: resp.length }
+      })
+    )
+  }
  
-  search(text: string) {
-    return this.http.get<{ jobs: any[], length: number }>(`${base_url}/jobs/${text}`).pipe(
+  search(level: string) {
+    return this.http.get<{ jobs: any[], length: number }>(`${base_url}/jobs/${level}`).pipe(
       map(resp => {
         return { jobs: resp.jobs, length: resp.length }
       })
     )
   }
+
   add(job: any, jobDetail:any) {
     return this.http.post<any>(`${base_url}/jobs`, { job, jobDetail}).pipe(
       map(resp => resp)
@@ -144,8 +161,7 @@ export class JobService {
         console.log(resp)
         const newOrg=resp.organigrama.map(el => {         
           el.data.forEach((item: any, index: number) => {
-           
-         
+            
             if(item.estado =="ITEM"){
               el.data[index].tags=['item']
             }
