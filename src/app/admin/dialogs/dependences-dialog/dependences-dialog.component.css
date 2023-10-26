@@ -4,3 +4,12 @@ mat-list {
     overflow: auto;
     height: 300px;
 }
+
+.vertical-radio-group .mat-radio-button {
+    display: block;
+}
+
+
+
+
+

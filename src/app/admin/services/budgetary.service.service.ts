@@ -18,6 +18,12 @@ export class BudgetaryService{
     )
   }
 
+  searchPartidaForJob(text: string) {
+    return this.http.get<any[]>(`${base_url}/budgetarys/forjob/${text}`).pipe(
+      map(resp => resp)
+    )
+  }
+
   edit(id_budgetary: string, budgetary: any) {
     return this.http.put<any>(`${base_url}/budgetarys/${id_budgetary}`, budgetary).pipe(
       map(resp => resp)

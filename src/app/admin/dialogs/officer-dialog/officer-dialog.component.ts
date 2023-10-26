@@ -64,6 +64,7 @@ export class OfficerDialogComponent {
       this.availableJobs = data
     })
   }
+  
   selectJob(job: any) {
     this.Form_Funcionario.get('cargo')?.setValue(job._id)
   }

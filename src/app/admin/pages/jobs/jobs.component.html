@@ -21,8 +21,9 @@
                 </button>
             </mat-form-field>
         </div>
+
         <div class="col-sm-2">
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
                 <mat-label>Nivel</mat-label>
                 <mat-select (selectionChange)="nivelSeleccionado($event)" [(ngModel)]="filterLevel">
                     <mat-option value="noneLevel">Todos</mat-option>
@@ -33,7 +34,7 @@
             </mat-form-field>
         </div>
         <div class="col-sm-3">
-            <mat-form-field>
+            <mat-form-field class="example-full-width">
                 <mat-label>Estado</mat-label>
                 <mat-select (selectionChange)="estadoSelecionado($event)" [(ngModel)]="filterEstado">                  
                     <mat-option value="noneEstado">Todos</mat-option>
@@ -43,10 +44,7 @@
             </mat-form-field>
         </div>
     </div>
-    
-
-    
-    
+       
     <div class="example-container mat-elevation-z8">
         <div class="example-table-container">
             <table mat-table [dataSource]="dataSource">

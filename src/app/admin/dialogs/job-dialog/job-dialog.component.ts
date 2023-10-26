@@ -13,8 +13,10 @@ import { BudgetaryService} from '../../services/budgetary.service.service'
 })
 
 export class JobDialogComponent {
+  availablePartidas: any[] = []
   availableJobs: any[] = []
   noJob: boolean = false
+  noPartida: boolean = false
   jobs: any[] = []
   dependentJobs: any[] = []
   tipoContrato: string
@@ -26,22 +28,14 @@ export class JobDialogComponent {
     secretaria: ['', Validators.required],
     nivel_id: ['', Validators.required],
     isRoot: [false, Validators.required],
-    estado: [false, Validators.required],
+    estado: ['ELIMINACION', Validators.required],
     tipoContrato: ['', Validators.required],
-    superior: ['', Validators.required]
-
+    superior: ['', Validators.required],
+    //dependencia_id:[''],
+    partida_id:['',Validators.required],
+    denominacion:['',Validators.required],
+    duracion_contrato:['',Validators.required],
   }); 
-
-  FormJobDetail: FormGroup = this.fb.group({
-    partidaPresupuestaria: ['', Validators.required],
-    objetivoPuesto: ['', Validators.required],
-    denominacionPuesto: ['', Validators.required],  
-    tipoGasto: ['', Validators.required],
-    casos: ['', Validators.required] ,
-    fuenteFinanciamiento: ['', Validators.required],
-    organismoFinanciador: ['', Validators.required],
-    duracionContrato: ['', Validators.required]
-  });
 
   constructor(
     private cargoService: JobService,
@@ -67,10 +61,8 @@ export class JobDialogComponent {
 
     if (this.data) {
       const { nivel_id,superior, ...values } = this.data
-       ///this.FormJob.patchValue(this.data)
        this.cargoService.getDependentsOfSuperior(this.data._id).subscribe(jobs => this.dependentJobs = jobs)
        this.FormJob.patchValue({ ...values, nivel_id: nivel_id._id })
-       this.FormJobDetail.patchValue({ ... this.data.detalle_id})
        console.log(this.data)
       if (!superior) {
         this.noJob = true
@@ -91,20 +83,18 @@ export class JobDialogComponent {
   }
 
   save() {
-    
     const newJob = {
       ...this.FormJob.value,
       dependents: this.dependentJobs.map(element => element._id)
     }
+    console.log(newJob)
 
     if (this.data) {
-      this.cargoService.edit(this.data._id, newJob, this.FormJobDetail.value).subscribe(job => this.dialogRef.close(job))
+      this.cargoService.edit(this.data._id, newJob).subscribe(job => this.dialogRef.close(job))
     }
     else {
-      this.cargoService.add(newJob, this.FormJobDetail.value).subscribe(job => this.dialogRef.close(job))
+      this.cargoService.add(newJob).subscribe(job => this.dialogRef.close(job))
     }
-
-
   }
 
   selectDependents(value: any) {
@@ -134,14 +124,10 @@ export class JobDialogComponent {
     if (this.FormJob.get('tipoContrato')?.value === 'ITEM') {
       if (this.FormJob.valid) return true
     }
-    else if (this.FormJob.get('tipoContrato')?.value === 'CONTRATO') {
-      if (this.FormJob.valid && this.FormJobDetail.valid) return true
-    }
     return false
   }
 
   searchJob(value: any) {
-    
     this.cargoService.searchJobForOfficer(value).subscribe(data => {
       this.availableJobs = data
     })
@@ -159,4 +145,25 @@ export class JobDialogComponent {
       this.FormJob.addControl('superior', new FormControl(this.data?.superior ? this.data.superior._id : '', Validators.required))
     }
   }
+
+
+
+  searchPartida(value: any) {
+    this.BudgetaryService.searchPartidaForJob(value).subscribe(data => {
+      this.availablePartidas = data
+    })
+  }
+
+  selectPartida(bulgetary: any) {
+    this.FormJob.get('partida_id')?.setValue(bulgetary._id)
+  }
+
+  removePartida() {
+    if (this.noPartida) {
+      this.FormJob.removeControl('partida_id')
+    }
+    else {
+      this.FormJob.addControl('partida_id', new FormControl(this.data?.partida_id ? this.data.partida_id._id : '', Validators.required))
+    }
+  } 
 }

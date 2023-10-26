@@ -36,4 +36,10 @@ export class DependenceServiceService {
       map(resp => resp))
   }
 
+  searchDependenceForDependence(text: string) {
+    return this.http.get<any[]>(`${base_url}/depedences/search/dependence/${text}`).pipe(
+      map(resp => resp)
+    )
+  }
+
 }

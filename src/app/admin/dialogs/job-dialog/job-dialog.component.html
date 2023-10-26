@@ -3,7 +3,6 @@
     <mat-tab-group>
         <form [formGroup]="FormJob">
             <mat-tab label="Datos">
-                
                 <div class="row">   
                     <div class="col-sm-8">
                         <mat-form-field class="example-full-width">
@@ -18,14 +17,14 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="fill" class="example-full-width">
                             <mat-label>Secretaría</mat-label>
                             <input formControlName="secretaria" matInput>
                         </mat-form-field>
                     </div>  
         
                     <div class="col-sm-4">
-                        <mat-form-field>
+                        <mat-form-field class="example-full-width">
                             <mat-label>Nivel</mat-label>
                              <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>                                
                                     <mat-option *ngFor="let lev of niveles" [value]="lev._id">
@@ -65,10 +64,42 @@
                                 </div>
                         </div>
                     </div>
-                  </div>
-                
-                
-                
+                  </div>        
+        </mat-tab>
+
+        <mat-tab label="Detalles del cargo" *ngIf="FormJob.get('tipoContrato')?.value=='CONTRATO'" >    
+            <div class="row">
+                <div class="row">
+                    <div class="row">
+                        <div *ngIf="!noPartida" class="col-sm-8">
+                            <app-sever-mat-select [initialValue]="data?data.partida_id:null"
+                                [placeholder]="'Buscar partida presupuestaria'" [pathPropertyOfObjectDisplay]="'nombrePartida'"
+                                [data]="availablePartidas" (eventSelectedOption)="selectPartida($event)"
+                                (eventSearch)="searchPartida($event)">
+                            </app-sever-mat-select>
+                        </div>
+                    <div class="col-sm-3">
+                        <mat-checkbox (change)="removePartida()" [(ngModel)]="noPartida" [ngModelOptions]="{standalone:true}" class="example-margin">
+                            Sin cargo partida Presupuestaria
+                        </mat-checkbox>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Denominacion del Puesto</mat-label>
+                            <input formControlName="denominacion" matInput>
+                        </mat-form-field>
+                    </div>  
+                    <div class="col-sm-6">
+                        <mat-form-field appearance="fill" class="example-full-width" >
+                            <mat-label>Duracion de Contrato</mat-label>
+                            <input formControlName="duracion_contrato" matInput>
+                        </mat-form-field>
+                    </div> 
+                </div>  
+            </div>
+        </div>      
         </mat-tab>
 
         <mat-tab label="Organigrama"> 
@@ -81,11 +112,13 @@
                                     <app-sever-mat-select [initialValue]="data?data.superior:null"
                                         [placeholder]="'Buscar cargo superior'" [pathPropertyOfObjectDisplay]="'nombre'"
                                         [data]="availableJobs" (eventSelectedOption)="selectJob($event)"
-                                        (eventSearch)="searchJob($event)"></app-sever-mat-select>
+                                        (eventSearch)="searchJob($event)">
+                                    </app-sever-mat-select>
                                 </div>
                             <div class="col-sm-3">
-                                <mat-checkbox (change)="removeJob()" [(ngModel)]="noJob" [ngModelOptions]="{standalone:true}" class="example-margin">Sin
-                                    cargo superior</mat-checkbox>
+                                <mat-checkbox (change)="removeJob()" [(ngModel)]="noJob" [ngModelOptions]="{standalone:true}" class="example-margin">
+                                    Sin cargo superior
+                                </mat-checkbox>
                             </div>
                         </div>
                     </div>  
@@ -118,86 +151,8 @@
                         </div>      
                     </div>
                 </div>            
-        </mat-tab>  
-    </form>        
-   
-
-
-    <mat-tab *ngIf="FormJob.get('tipoContrato')?.value=='CONTRATO'" label="Detalle Contrato">
-            <form [formGroup]="FormJobDetail">
-                <div>
-                    <div class="col-sm-12">
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Partida Presupuestaria</mat-label>
-                            <input formControlName="partidaPresupuestaria" matInput>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="col-sm-12">
-                        <mat-form-field>
-                            <mat-label>Partidas</mat-label>
-                             <mat-select (selectionChange)="nivelSeleccionado($event)" formControlName='nivel_id'>                                
-                                    <mat-option *ngFor="let lev of partidas" [value]="lev._id">
-                                        {{lev.nivel}}
-                                    </mat-option>                                   
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                
-                    <div class="col-sm-12">
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Objetivo del Puesto</mat-label>
-                            <input formControlName="objetivoPuesto" matInput>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Denominacion del Puesto</mat-label>
-                            <input formControlName="denominacionPuesto" matInput>
-                        </mat-form-field>
-                    </div>  
-    
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Tipo de Gasto</mat-label>
-                            <input formControlName="tipoGasto" matInput>
-                        </mat-form-field>
-                    </div>
-    
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Numero de Casos</mat-label>
-                            <input formControlName="casos" matInput>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Fuente de Financiamiento</mat-label>
-                            <input formControlName="fuenteFinanciamiento" matInput>
-                        </mat-form-field>
-                    </div>  
-    
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Organismo Financiador</mat-label>
-                            <input formControlName="organismoFinanciador" matInput>
-                        </mat-form-field>
-                    </div>
-    
-                    <div class="col-sm-4">
-                        <mat-form-field appearance="fill">
-                            <mat-label>Duracion de Contrato</mat-label>
-                            <input formControlName="duracionContrato" matInput>
-                        </mat-form-field>
-                    </div>
-                </div>
-            </form>
-        </mat-tab> 
-        
+            </mat-tab> 
+        </form>        
       </mat-tab-group>
     
 </mat-dialog-content>

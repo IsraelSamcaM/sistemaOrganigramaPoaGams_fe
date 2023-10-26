@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent implements AfterViewInit {
+  
   text: string = ''
   level: string = 'noneLevel'
   estado: string = 'noneEstado'

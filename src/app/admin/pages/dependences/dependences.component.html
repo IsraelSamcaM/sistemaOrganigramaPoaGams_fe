@@ -27,12 +27,26 @@
                 
                 <ng-container matColumnDef="depende_de">
                     <th mat-header-cell *matHeaderCellDef> Depende de </th>
-                    <td mat-cell *matCellDef="let element"> {{element?.depende_de.nombre}} </td>
+                    <td mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.depende_de; else noDependenceTemplate">
+                            {{element.depende_de.nombre}}
+                        </ng-container>
+                        <ng-template #noDependenceTemplate>
+                            <span style="color: red;">SIN DEPENDENCIA</span>
+                        </ng-template>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="encargado">
                     <th mat-header-cell *matHeaderCellDef> Encargado </th>
-                    <td mat-cell *matCellDef="let element"> {{element?.encargado.nombre}} </td>
+                    <td mat-cell *matCellDef="let element"> 
+                        <ng-container *ngIf="element.encargado; else noEncargadoTemplate">
+                            {{element.encargado.nombre}}
+                        </ng-container>
+                        <ng-template #noEncargadoTemplate>
+                            <span style="color: red;">SIN ENCARGADO</span>
+                        </ng-template>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="estado">
@@ -45,6 +59,7 @@
                     <td mat-cell *matCellDef="let element"> {{element?.tipo}} </td>
                 </ng-container>
 
+            
                 <ng-container matColumnDef="options">
                     <th mat-header-cell *matHeaderCellDef>Options</th>
                     <td mat-cell *matCellDef="let element">
