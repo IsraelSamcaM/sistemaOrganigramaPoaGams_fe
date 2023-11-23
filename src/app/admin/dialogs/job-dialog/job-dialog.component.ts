@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobService } from '../../services/job.service';
 import { LevelService } from '../../services/level.service';
 import { BudgetaryService} from '../../services/budgetary.service.service'
+import { DependenceServiceService} from '../../services/dependence.service.service'
 
 @Component({
   selector: 'app-job-dialog',
@@ -23,30 +24,48 @@ export class JobDialogComponent {
   niveles: any[] = []
   partidas: any[] = []
   
-  FormJob: FormGroup = this.fb.group({
+  secretarias: any[] = []
+  jefaturas: any[] = []
+  direcciones: any[] = []
+
+  id_dependence_jef: string = ''
+  id_dependence_dir: string = ''
+  id_dependence_sec: string = ''
+
+  selecionado: string = ''
+
+  FormJob: FormGroup = this.fb.group({  
     nombre: ['', Validators.required],
-    secretaria: ['', Validators.required],
+
+    secretaria: [''],
+    jefatura: [''],
+    direccion: [''],
+
     nivel_id: ['', Validators.required],
     isRoot: [false, Validators.required],
     estado: ['ELIMINACION', Validators.required],
     tipoContrato: ['', Validators.required],
     superior: ['', Validators.required],
-    //dependencia_id:[''],
+    dependencia_id:['', Validators.required],
     partida_id:['',Validators.required],
     denominacion:['',Validators.required],
-    duracion_contrato:['',Validators.required],
+    duracion_contrato:[0,Validators.required],
   }); 
+
+  selectedOption: any;
 
   constructor(
     private cargoService: JobService,
     private levelService: LevelService,
     private BudgetaryService: BudgetaryService,
+    private DependenceService:DependenceServiceService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<JobDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
 
   }
+
   ngOnInit(): void {
 
     console.log(this.data)
@@ -59,10 +78,28 @@ export class JobDialogComponent {
       this.partidas=data.budgetary          
     })
 
+    this.DependenceService.getSecretarias().subscribe(data=>{
+      this.secretarias = data.dependences        
+    })
+
+    if(this.id_dependence_jef !== ''){
+      this.DependenceService.getByDependenceId(this.id_dependence_jef).subscribe(data=>{
+        this.jefaturas = data.dependences        
+      })
+    }
+    if(this.id_dependence_dir !== ''){
+      this.DependenceService.getByDependenceId(this.id_dependence_dir).subscribe(data=>{
+        this.direcciones = data.dependences        
+      })
+    }
+
+    
+
     if (this.data) {
       const { nivel_id,superior, ...values } = this.data
        this.cargoService.getDependentsOfSuperior(this.data._id).subscribe(jobs => this.dependentJobs = jobs)
        this.FormJob.patchValue({ ...values, nivel_id: nivel_id._id })
+       
        console.log(this.data)
       if (!superior) {
         this.noJob = true
@@ -75,6 +112,8 @@ export class JobDialogComponent {
 
 
   }
+
+  public mostrarBloque: boolean = false;
 
   searchDependents(text: string) {
     this.cargoService.searchSuperior(text).subscribe(jobs => {
@@ -119,6 +158,51 @@ export class JobDialogComponent {
     const selectedValue = event.value;
     console.log('Nivel seleccionado:', selectedValue);
   }
+
+  secreSeleccionado(event: any) {
+    this.direcciones = []
+    const selectedValue = event.value;
+    this.id_dependence_jef = selectedValue._id
+
+    this.FormJob.get("secretaria")?.setValue(selectedValue.sigla)
+    
+    this.DependenceService.getByDependenceId(this.id_dependence_jef).subscribe(data=>{
+      this.jefaturas = data.dependences        
+    })
+    this.selecionarDependencia(event.value)
+
+    console.log('Secretaria seleccionado:', selectedValue);
+  }
+
+
+  selecionarDependencia(dependence: any) {
+    this.FormJob.get("dependencia_id")?.setValue(dependence._id)
+  }
+ 
+  jefSeleccionado(event: any) {
+    const selectedValue = event.value;
+    this.id_dependence_jef = selectedValue._id
+
+    this.FormJob.get("jefatura")?.setValue(selectedValue.sigla)
+
+    this.DependenceService.getByDependenceId(this.id_dependence_jef).subscribe(data=>{
+      this.direcciones = data.dependences        
+    })
+    this.selecionarDependencia(event.value)
+
+    console.log('Jefatura seleccionado:', selectedValue);
+  }
+
+  direcSeleccionado(event: any) {
+    const selectedValue = event.value;
+
+    this.selecionarDependencia(event.value)
+
+    this.FormJob.get("direccion")?.setValue(selectedValue.sigla)
+
+    console.log('Direccion seleccionado:', selectedValue);
+  }
+
 
   get isFormValid() {
     if (this.FormJob.get('tipoContrato')?.value === 'ITEM') {
@@ -166,4 +250,20 @@ export class JobDialogComponent {
       this.FormJob.addControl('partida_id', new FormControl(this.data?.partida_id ? this.data.partida_id._id : '', Validators.required))
     }
   } 
+  
+  restablecerCombos(){
+    this.FormJob.get("dependencia_id")?.setValue("")
+    this.FormJob.get("secretaria")?.setValue("")
+    this.FormJob.get("direccion")?.setValue("")
+    this.FormJob.get("jefatura")?.setValue("")
+
+    // this.secretarias= []
+    this.jefaturas= []
+    this. direcciones = []
+    this.id_dependence_jef = ''
+    this.id_dependence_dir = ''
+    this.id_dependence_sec = ''
+    
+  }
+  Edit(){}
 }

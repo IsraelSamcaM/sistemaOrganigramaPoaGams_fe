@@ -79,7 +79,7 @@ export class DependencesDialogComponent {
       this.availableDependences = data
     })
   }
-
+  
   selectDependence(dependence: any) {
     this.FormDependence.get('depende_de')?.setValue(dependence._id)  
   }

@@ -13,6 +13,9 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class JobsComponent implements AfterViewInit {
   
+ 
+
+  
   text: string = ''
   level: string = 'noneLevel'
   estado: string = 'noneEstado'
@@ -75,7 +78,7 @@ export class JobsComponent implements AfterViewInit {
 
   Edit(item: any) {
     const dialogRef = this.dialog.open(JobDialogComponent, {
-      width: '870px',
+      width: '770px',
       data: item
     });
 
@@ -92,7 +95,7 @@ export class JobsComponent implements AfterViewInit {
 
   add() {
     const dialogRef = this.dialog.open(JobDialogComponent, {
-      width: '870px'
+      width: '770px'
     });
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {

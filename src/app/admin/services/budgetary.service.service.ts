@@ -41,4 +41,12 @@ export class BudgetaryService{
       map(resp => resp))
   }
 
+  searchWithText(text: string) {
+    return this.http.get<{ budgetarys: any[], length: number }>(`${base_url}/budgetarys/search/${text}`).pipe(
+      map(resp => { 
+        return { budgetarys: resp.budgetarys, length: resp.length }
+      })
+    )
+  }
+
 }

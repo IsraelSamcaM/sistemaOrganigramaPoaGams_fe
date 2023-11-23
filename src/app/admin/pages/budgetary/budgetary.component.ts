@@ -12,9 +12,8 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./budgetary.component.css']
 })
 export class BudgetaryComponent implements AfterViewInit {
-  
   text: string = ''
-  displayedColumns = ['codigo' ,'nombre','fuenteFinanciamiento','organismoFinanciador','options']
+  displayedColumns = ['codigo' ,'nombre','fuenteFinanciamiento','organismoFinanciador','activo','options']
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,11 +28,22 @@ export class BudgetaryComponent implements AfterViewInit {
   }
 
   Get() {
+    if(this.text != ''){
+      this.BudgetaryService.searchWithText(this.text).subscribe(data => {
+        this.dataSource = new MatTableDataSource(data.budgetarys)
+        this.dataSource.paginator = this.paginator;
+      }) 
+    }
+
+    else{
       this.BudgetaryService.get().subscribe(data => {
         this.dataSource = new MatTableDataSource(data.budgetary)
         this.dataSource.paginator = this.paginator;
-      })    
+      }) 
+    }
+         
   }
+
 
   applyFilter(event: Event) {
     this.text = (event.target as HTMLInputElement).value;
@@ -82,5 +92,6 @@ export class BudgetaryComponent implements AfterViewInit {
       }
     });
   }
+  
   
 }

@@ -13,7 +13,7 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class DependencesComponent implements AfterViewInit {
   text: string = ''
-  displayedColumns = ['nombre','sigla','encargado','depende_de','estado','tipo','options']
+  displayedColumns = ['nombre','sigla','encargado','depende_de','tipo','estado','options']
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -31,12 +31,19 @@ export class DependencesComponent implements AfterViewInit {
   }
 
   Get() {
+    if(this.text !== ''){
+      this.DependenceService.searchWithText(this.text).subscribe(data => {
+        this.dataSource = new MatTableDataSource(data.dependences)
+        this.dataSource.paginator = this.paginator;
+      })
+    }else{
       this.DependenceService.get().subscribe(data => {
         this.dataSource = new MatTableDataSource(data.dependences)
         this.dataSource.paginator = this.paginator;
       })
-    
+    }  
   }
+
   applyFilter(event: Event) {
     this.text = (event.target as HTMLInputElement).value;
     this.Get()
