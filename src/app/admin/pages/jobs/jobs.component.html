@@ -68,6 +68,11 @@
                     <td mat-cell *matCellDef="let element"> {{element?.tipoContrato}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="funcionario">
+                    <th mat-header-cell *matHeaderCellDef> Funcionario </th>
+                    <td mat-cell *matCellDef="let element"> {{element?.funcionario}} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="nivel_id.nivel">
                     <th mat-header-cell *matHeaderCellDef> Nivel </th>
                     <td mat-cell *matCellDef="let element"> {{element?.nivel_id.nivel}} </td>

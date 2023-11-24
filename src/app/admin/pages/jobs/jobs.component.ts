@@ -12,21 +12,16 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./jobs.component.css']
 })
 export class JobsComponent implements AfterViewInit {
-  
- 
-
-  
+   
   text: string = ''
   level: string = 'noneLevel'
   estado: string = 'noneEstado'
-  displayedColumns = ['nombre','secretaria','tipoContrato','nivel_id.nivel','estado','superior','options']
+  displayedColumns = ['nombre','secretaria','tipoContrato','funcionario','nivel_id.nivel','estado','superior','options']
   dataSource = new MatTableDataSource<any>([]);
   niveles: any[] = []
   filterEstado = "noneEstado"
   filterLevel = "noneLevel"
   
-  
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private cargoService: JobService,
@@ -36,7 +31,6 @@ export class JobsComponent implements AfterViewInit {
   
   {
     this.Get()
-    
   }
 
   ngAfterViewInit() {
@@ -67,7 +61,7 @@ export class JobsComponent implements AfterViewInit {
         this.dataSource.paginator = this.paginator;
       })
     }
-    
+
     else {
       this.cargoService.get().subscribe(data => {
         this.dataSource = new MatTableDataSource(data.jobs)

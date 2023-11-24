@@ -93,8 +93,6 @@ export class JobDialogComponent {
       })
     }
 
-    
-
     if (this.data) {
       const { nivel_id,superior, ...values } = this.data
        this.cargoService.getDependentsOfSuperior(this.data._id).subscribe(jobs => this.dependentJobs = jobs)
@@ -109,8 +107,6 @@ export class JobDialogComponent {
         this.FormJob.patchValue({ ...values, superior: superior._id })
       }
      }
-
-
   }
 
   public mostrarBloque: boolean = false;
