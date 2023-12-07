@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OfficerService } from '../../services/officer.service';
 import { JobService } from '../../services/job.service';
+import { RotationService } from '../../services/rotation.service';
 
 @Component({
   selector: 'app-officer-dialog',
@@ -27,6 +28,7 @@ export class OfficerDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<OfficerDialogComponent>,
     private usuariosService: OfficerService,
+    private rotacionesService: RotationService,
     private cargoService: JobService
   ) { }
 
@@ -46,10 +48,21 @@ export class OfficerDialogComponent {
 
 
   guardar() {
-    if (this.data) {  
+    if (this.data) { 
+      const valor =  this.Form_Funcionario.get('cargo')?.value
+      console.log("soy cargo valor" + valor)
       this.usuariosService.edit(this.data._id, this.Form_Funcionario.value).subscribe(officer => {
         this.dialogRef.close(officer);
       })  
+      const subir = this.procesarData(this.data)
+      this.rotacionesService.add(subir).subscribe(
+        (response) => {
+          console.log('Solicitud exitosa:', response);
+        },
+        (error) => {
+          console.error('Error en la solicitud:', error);
+        }
+      )
     }
     else {
       this.usuariosService.add(this.Form_Funcionario.value).subscribe(officer => {
@@ -58,6 +71,22 @@ export class OfficerDialogComponent {
     }   
   }
 
+  procesarData(data: any) {
+    const hayCargo = this.Form_Funcionario.get('cargo')?.value
+    if(hayCargo == undefined){
+      const nuevaData = {
+          funcionario_id: data._id
+      };
+      return nuevaData;
+    }else{
+      const nuevaData = {
+          cargo_id: this.Form_Funcionario.get('cargo')?.value,
+          funcionario_id: data._id
+      };
+      return nuevaData;
+    }
+  }
+  
 
   searchJob(value: any) {
     this.cargoService.searchJobForOfficer(value).subscribe(data => {
