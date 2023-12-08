@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { RotationJobDialogComponent } from '../../dialogs/rotation-job-dialog/rotation-job-dialog.component';
 
 @Component({
   selector: 'app-jobs',
@@ -124,4 +125,10 @@ export class JobsComponent implements AfterViewInit {
     this.GetJobsLevelEstado()
   }
 
+  Rotation(item: any) {
+    const dialogRef = this.dialog.open(RotationJobDialogComponent, {
+      width: '1000px',
+      data: item
+    })
+  }
 }

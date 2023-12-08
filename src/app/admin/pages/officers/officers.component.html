@@ -66,16 +66,20 @@
                         </button>
                         <mat-menu #menu="matMenu">
                             <button mat-menu-item (click)="Edit(element)">
-                                <mat-icon>edit</mat-icon>
+                                <mat-icon style="color: royalblue;">edit</mat-icon>
                                 <span>Editar funcionario</span>
+                            </button>
+                            <button mat-menu-item (click)="Rotation(element)">
+                                <mat-icon style="color: royalblue;">list</mat-icon>
+                                <span>Rotaciones del funcionario</span>
                             </button>
                             <button mat-menu-item (click)="delete(element)">
                                 <ng-container *ngIf="element.activo; else inactivoTemplate">
-                                    <mat-icon style="vertical-align: middle;">delete</mat-icon>
+                                    <mat-icon style="vertical-align: middle;" style="color: brown;">delete</mat-icon>
                                     <span>Eliminar funcionario</span>
                                 </ng-container>
                                 <ng-template #inactivoTemplate>
-                                    <mat-icon>restart_alt</mat-icon>
+                                    <mat-icon style="color: green;">restart_alt</mat-icon>
                                     <span>Habilitar funcionario</span>
                                 </ng-template>
                             </button>
@@ -94,9 +98,8 @@
                 aria-label="Select page of periodic elements">
             </mat-paginator>
         </div>
-
     </div>
-
-
-
 </div>
+<p>
+    <span class="example-spacer"></span>
+</p>

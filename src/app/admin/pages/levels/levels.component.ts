@@ -38,22 +38,22 @@ export class LevelsComponent implements AfterViewInit {
   }
 
   Get() {
-   
- 
       this.LevelService.get().subscribe(data => {
         this.dataSource = new MatTableDataSource(data.levels)
         this.dataSource.paginator = this.paginator;
       })
-    
   }
+
   applyFilter(event: Event) {
     this.text = (event.target as HTMLInputElement).value;
     this.Get()
   }
+
   cancelSearch() {
     this.text = ''
     this.Get()
   }
+  
   Edit(item: any) {
     const dialogRef = this.dialog.open(LevelDialogComponent, {
       width: '800px',

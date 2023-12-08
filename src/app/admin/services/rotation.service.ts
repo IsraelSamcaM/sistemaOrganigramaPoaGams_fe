@@ -19,6 +19,15 @@ export class RotationService {
     )
   }
 
+  getRegistrosFun(funcionario_id: string) {
+    return this.http.get<{ rotations: any[]}>(`${base_url}/rotations/rotation_fun/${funcionario_id}`)
+  }
+
+  getRegistrosCar(funcionario_id: string) {
+    return this.http.get<{ rotations: any[]}>(`${base_url}/rotations/rotation_car/${funcionario_id}`)
+  }
+
+
   edit(id_rotation: string,   rotation: any) {
     return this.http.put<any>(`${base_url}/rotations/${id_rotation}`, rotation).pipe(
       map(resp => resp)

@@ -18,9 +18,8 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
 import { OrgcharComponent } from './component/orgchar/orgchar.component';
 import { DependencesDialogComponent } from './dialogs/dependences-dialog/dependences-dialog.component';
 import { DependencesComponent } from './pages/dependences/dependences.component';
-
-
-
+import { RotationOfficerDialogComponent } from './dialogs/rotation-officer-dialog/rotation-officer-dialog.component';
+import { RotationJobDialogComponent } from './dialogs/rotation-job-dialog/rotation-job-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,8 @@ import { DependencesComponent } from './pages/dependences/dependences.component'
     OrgcharComponent,
     DependencesDialogComponent,
     DependencesComponent,
-
+    RotationOfficerDialogComponent,
+    RotationJobDialogComponent
      
   ],
   imports: [
@@ -47,7 +47,8 @@ import { DependencesComponent } from './pages/dependences/dependences.component'
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxGraphModule
+    NgxGraphModule,
+    
   ]
 })
 export class AdminModule { }

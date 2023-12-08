@@ -73,6 +73,7 @@ export class OfficerDialogComponent {
 
   procesarData(data: any) {
     const hayCargo = this.Form_Funcionario.get('cargo')?.value
+    
     if(hayCargo == undefined){
       const nuevaData = {
           funcionario_id: data._id

@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { OfficerDialogComponent } from '../../dialogs/officer-dialog/officer-dialog.component';
+import { RotationOfficerDialogComponent } from '../../dialogs/rotation-officer-dialog/rotation-officer-dialog.component';
 
 @Component({
   selector: 'app-officers',
@@ -20,6 +21,7 @@ export class OfficersComponent {
     private funcionariosService: OfficerService,
     public dialog: MatDialog) {
   }
+  
   ngOnDestroy(): void {
   }
 
@@ -68,6 +70,13 @@ export class OfficersComponent {
         this.dataSource.paginator = this.paginator;
       }
     });
+  }
+
+  Rotation(officer: any) {
+    const dialogRef = this.dialog.open(RotationOfficerDialogComponent, {
+      width: '1000px',
+      data: officer
+    })
   }
 
   delete(officer: any) {
