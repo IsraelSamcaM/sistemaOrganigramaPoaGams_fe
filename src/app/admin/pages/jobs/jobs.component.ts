@@ -78,12 +78,14 @@ export class JobsComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
+
       if (result) {
+        result.funcionario = item.funcionario
         const index = this.dataSource.data.findIndex(element => element._id === result._id);
         this.dataSource.data[index] = result
         this.dataSource = new MatTableDataSource(this.dataSource.data)
         this.dataSource.paginator = this.paginator;
-        console.log(result)
+        //console.log(result)
       }
     });
   }

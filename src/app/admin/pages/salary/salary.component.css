@@ -13,3 +13,12 @@
   .tam-head {
     font-size: 17px;
   }
+
+  .example-container {
+   
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  } 

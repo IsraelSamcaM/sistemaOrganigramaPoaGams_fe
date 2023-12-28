@@ -76,18 +76,27 @@ export class JobService {
     )
   }
 
-  //metodo de global de items nuevo 
+  //metodo de global de items  
   getGlobalItemSalariosTotal() {
-    return this.http.get<{ globalSalariosItemTotal: any[], length: number }>(`${base_url}/jobs/totalGlobalItems`).pipe(
+    return this.http.get<{ globalSalariosItemTotal: any[], length: number }>(`${base_url}/consults/totalGlobalItems`).pipe(
       map(resp => {
         return { globalSalarysItemTotal: resp.globalSalariosItemTotal, length: resp.length }
       })
     )
   }
 
+  //metodo de global de eventuales  
+  getGlobalEventualSalariosTotal() {
+    return this.http.get<{ globalSalariosItemTotal: any[], length: number }>(`${base_url}/consults/totalGlobalEventuales`).pipe(
+      map(resp => {
+        return { globalSalarysEventualesTotal: resp.globalSalariosItemTotal, length: resp.length }
+      })
+    )
+  }
+
   /* get total de items*/ 
   getFullItems() {
-    return this.http.get<{ fullItemsTable: any[], length: number }>(`${base_url}/jobs/fullItemsTable`).pipe(
+    return this.http.get<{ fullItemsTable: any[], length: number }>(`${base_url}/consults/fullItemsTable`).pipe(
       map(resp => {
         return { fullItems: resp.fullItemsTable, length: resp.length }
       })
@@ -95,7 +104,7 @@ export class JobService {
   }
   /* get total de eventuales*/ 
     getFullEventuales() {
-    return this.http.get<{ fullEventualesTable: any[], length: number }>(`${base_url}/jobs/fullEventualesTable`).pipe(
+    return this.http.get<{ fullEventualesTable: any[], length: number }>(`${base_url}/consults/fullEventualesTable`).pipe(
       map(resp => {
         return { fullEventuales: resp.fullEventualesTable, length: resp.length }
       })

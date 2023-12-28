@@ -50,6 +50,9 @@
                             <td class="mat-cell" colspan="4">No data matching the filter </td>
                         </tr>
                     </table>
+                    <mat-paginator #paginatorEscSal="matPaginator"
+                        [pageSizeOptions]="[6, 10, 25]" aria-label="Select page">
+                    </mat-paginator>
                 </div>
             </div>
         
@@ -153,7 +156,7 @@
                         </tr> 
                     </table>  
                     <mat-paginator #paginatorParPre="matPaginator"
-                        [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+                        [pageSizeOptions]="[6, 10, 25, 100]" aria-label="Select page">
                     </mat-paginator>
                 </div>
             </div>
@@ -279,7 +282,7 @@
                             <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total Aportes</th>
                             <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
                         </ng-container>
-                        <ng-container matColumnDef="Total">
+                        <ng-container matColumnDef="Total" stickyEnd>
                             <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total</th>
                             <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.Total|currency:"Bs "}} </td>
                         </ng-container>
@@ -292,7 +295,7 @@
                         </tr>
                     </table>
                     <mat-paginator #paginatorItems="matPaginator"
-                        [pageSizeOptions]="[7, 20, 30]" aria-label="Select page">
+                        [pageSizeOptions]="[6, 20, 30]" aria-label="Select page">
                     </mat-paginator>  
                 </div>
             </div>
@@ -346,7 +349,7 @@
                             <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total Aportes</th>
                             <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
                         </ng-container>
-                        <ng-container matColumnDef="TotalTotal">
+                        <ng-container matColumnDef="TotalTotal" stickyEnd>
                             <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total</th>
                             <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalTotal|currency:"Bs "}} </td>
                         </ng-container>
@@ -372,7 +375,7 @@
                             <span class="tam-head">Tabla de Distribucion Personal y Sueldos Eventual
                             </span>
                             <div style="display: flex; align-items: center;">
-                                <button (click)="exportToExcel([dataSource8, dataSource4], [displayedColumns9, displayedColumns4], ['archivo1.xlsx', 'archivo2.xlsx'])" mat-icon-button>
+                                <button (click)="exportToExcel([dataSource8, dataSource10], [displayedColumns9, displayedColumns5], ['archivo1.xlsx', 'archivo2.xlsx'])" mat-icon-button>
                                 <mat-icon style="color: royalblue;">download</mat-icon>
                                 </button>   
                             </div>
@@ -447,57 +450,72 @@
                         </tr>
                     </table>
                     <mat-paginator #paginatorEventuales="matPaginator"
-                        [pageSizeOptions]="[10, 25, 50]" aria-label="Select page">
+                        [pageSizeOptions]="[6, 25, 50]" aria-label="Select page">
                     </mat-paginator> 
                 </div>
             </div>
         </div>
-        <div class="container-fluid"> 
-            <div class="example-container mat-elevation-z8">    
-                <div class="example-table-container">
-                    <table mat-table [dataSource]="dataSource4">
-                        <ng-container matColumnDef="partidaPresupuestaria">
-                            <th mat-header-cell *matHeaderCellDef> Partida Presupuestaria</th>
-                            <td mat-cell *matCellDef="let element">Total Eventuales</td>              
+        <div class="container-fluid">           
+            <div class="example-container mat-elevation-z8">
+                <div class="example-table-container">                   
+                    <table mat-table [dataSource]="dataSource10">
+                        <ng-container matColumnDef="DatosGenerales">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Datos Totales </th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> </td>              
                         </ng-container>
         
-                        <ng-container matColumnDef="cantidadCargos">
-                            <th mat-header-cell *matHeaderCellDef>N° Cargos</th>
-                            <td mat-cell *matCellDef="let element"> {{element?.cantidadCargos}} </td>
-                        </ng-container>
-        
-                        <ng-container matColumnDef="totalSueldos">
-                            <th mat-header-cell *matHeaderCellDef>Haber Basico</th>
-                            <td mat-cell *matCellDef="let element"> {{element?.totalSueldos|currency:"Bs "}} </td>
-                        </ng-container>
-        
-                        <ng-container matColumnDef="totalCostoAnual">
-                            <th mat-header-cell *matHeaderCellDef>Costo Anual</th>
-                            <td mat-cell *matCellDef="let element"> {{element?.totalCostoAnual|currency:"Bs "}} </td>
-                        </ng-container>
-        
-                        <ng-container matColumnDef="totalAportes">
-                            <th mat-header-cell *matHeaderCellDef>Aportes Patronales</th>
-                            <td mat-cell *matCellDef="let element"> {{element?.totalAportesRedondeado|currency:"Bs "}} </td>
+                        <ng-container matColumnDef="TotalItems">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> N° Items</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalItems}}  </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="totalAguinaldos">
-                            <th mat-header-cell *matHeaderCellDef>Aguinaldo</th>
-                            <td mat-cell *matCellDef="let element"> {{element?.totalAguinaldos|currency:"Bs "}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="total">
-                            <th mat-header-cell *matHeaderCellDef>Costo Total</th>
-                            <td mat-cell *matCellDef="let element"> {{element?.total|currency:"Bs "}} </td>
+                        <ng-container matColumnDef="TotalSueldoMensual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Mensual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalSueldoMensual|currency:"Bs "}} </td>
                         </ng-container>
         
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+                        <ng-container matColumnDef="TotalSueldoAnual">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Sueldo Anual</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalSueldoAnual|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="TotalAguinaldo">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Aguinaldo</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAguinaldo|currency:"Bs "}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="TotalCNS">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">CNS</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalCNS|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAFP">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">AFP</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAFP|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalProVivienda">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title"> Pro Viv.</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalProVivienda|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAporteSolidario">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Solidario</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAporteSolidario|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalAportes">
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total Aportes</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalAportes|currency:"Bs "}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="TotalTotal" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef class="tam-table-title">Total</th>
+                            <td mat-cell *matCellDef="let element" class="tam-table"> {{element?.TotalTotal|currency:"Bs "}} </td>
+                        </ng-container>
+        
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns5"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
         
                         <tr class="mat-row" *matNoDataRow>
                             <td class="mat-cell" colspan="4">No data matching the filter </td>
-                        </tr> 
-                    </table>  
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -558,7 +576,7 @@
                             <td mat-cell *matCellDef="let element"> {{element?.aguinaldos|currency:"Bs "}} </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="total">
+                        <ng-container matColumnDef="total" stickyEnd>
                             <th mat-header-cell *matHeaderCellDef>Total</th>
                             <td mat-cell *matCellDef="let element"> {{element?.total|currency:"Bs "}} </td>
                         </ng-container>
@@ -569,7 +587,10 @@
                         <tr class="mat-row" *matNoDataRow>
                             <td class="mat-cell" colspan="4">No data matching the filter </td>
                         </tr>
-                    </table>    
+                    </table>   
+                    <mat-paginator #paginatorPorSec="matPaginator"
+                        [pageSizeOptions]="[6, 10, 25]" aria-label="Select page">
+                    </mat-paginator> 
                 </div>
             </div>
         </div>

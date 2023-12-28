@@ -2,7 +2,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { JobService } from '../../services/job.service';
 import { MatDialog } from '@angular/material/dialog';
-import { JobDialogComponent } from '../../dialogs/job-dialog/job-dialog.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import * as XLSX from 'xlsx';
@@ -33,10 +32,14 @@ export class SalaryComponent {
   dataSource6 = new MatTableDataSource<any>([]);  
   dataSource7 = new MatTableDataSource<any>([]);
   dataSource8 = new MatTableDataSource<any>([]);
+  dataSource9 = new MatTableDataSource<any>([]);
+  dataSource10 = new MatTableDataSource<any>([]);
 
   @ViewChild('paginatorParPre') paginatorParPre: MatPaginator;
+  @ViewChild('paginatorEscSal') paginatorEscSal: MatPaginator;
   @ViewChild('paginatorItems') paginatorItems: MatPaginator;
   @ViewChild('paginatorEventuales') paginatorEventuales: MatPaginator;
+  @ViewChild('paginatorPorSec') paginatorPorSec: MatPaginator;
 
   constructor(  
     private cargoService: JobService,
@@ -47,6 +50,7 @@ export class SalaryComponent {
     this.GetTotalPartidaPresupestaria() 
     this.GetTotalPartidaPresupestariaGlobal()
     this.GetTotalItemsSalariosGlobal()
+    this.GetTotalEvetualesSalariosGlobal()
     this.GetSecretariasGlobal()
     this.GetFullItems()
     this.GetFullEventuales()
@@ -58,6 +62,7 @@ export class SalaryComponent {
   Get() {
       this.cargoService.getEscalaSalarial().subscribe(data => {
         this.dataSource = new MatTableDataSource(data.salarys)
+        this.dataSource.paginator = this.paginatorEscSal;
       })  
   }
 
@@ -86,9 +91,17 @@ export class SalaryComponent {
     })
   }
 
+  GetTotalEvetualesSalariosGlobal() {
+    this.cargoService.getGlobalEventualSalariosTotal().subscribe(data => {
+      this.dataSource10 = new MatTableDataSource(data.globalSalarysEventualesTotal)
+    })
+  }
+  
+
   GetSecretariasGlobal() {
     this.cargoService.getTotalSecretariaSalario().subscribe(data => {
       this.dataSource6 = new MatTableDataSource(data.secretariasTotalSalarys)
+      this.dataSource6.paginator = this.paginatorPorSec;
     })
   }
   /**/ 

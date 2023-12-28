@@ -68,7 +68,7 @@ export class JobDialogComponent {
 
   ngOnInit(): void {
 
-    console.log(this.data)
+    //console.log(this.data)
     
     this.levelService.get().subscribe(data=>{
       this.niveles=data.levels          
@@ -98,7 +98,7 @@ export class JobDialogComponent {
        this.cargoService.getDependentsOfSuperior(this.data._id).subscribe(jobs => this.dependentJobs = jobs)
        this.FormJob.patchValue({ ...values, nivel_id: nivel_id._id })
        
-       console.log(this.data)
+       //console.log(this.data)
       if (!superior) {
         this.noJob = true
         this.FormJob.patchValue(values)
@@ -121,8 +121,8 @@ export class JobDialogComponent {
     const newJob = {
       ...this.FormJob.value,
       dependents: this.dependentJobs.map(element => element._id)
-    }
-    console.log(newJob)
+    } 
+    //console.log(newJob)
 
     if (this.data) {
       this.cargoService.edit(this.data._id, newJob).subscribe(job => this.dialogRef.close(job))
