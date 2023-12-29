@@ -49,4 +49,12 @@ export class BudgetaryService{
     )
   }
 
+  verificationUsed(id: string) {
+    return this.http.get<{ existe: boolean }>(`${base_url}/budgetarys/verification/${id}`).pipe(
+      map(resp => { 
+        return { verificado: resp.existe}
+      })
+    )
+  }
+
 }

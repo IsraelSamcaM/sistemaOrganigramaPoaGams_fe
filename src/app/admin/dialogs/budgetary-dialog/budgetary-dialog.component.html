@@ -9,9 +9,9 @@
                         </mat-form-field>
                     </div>
                     <div class="col-sm-4">
-                        <mat-chip-listbox formControlName="activo">
+                        <mat-chip-listbox formControlName="activo" (change)="verificar()">
                             <mat-chip-option color="primary" [value] = 'true'> Habilitado </mat-chip-option>
-                            <mat-chip-option color="warn" [value] = 'false'> Deshabilitado</mat-chip-option>
+                            <mat-chip-option color="warn" [value] = 'false' > Deshabilitado</mat-chip-option>
                         </mat-chip-listbox>
                     </div>
                     <div class="col-sm-12">

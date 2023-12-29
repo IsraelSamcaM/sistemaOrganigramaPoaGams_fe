@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControlName, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { BudgetaryService } from '../../services/budgetary.service.service';
+import { BudgetaryModalComponent } from '../../modals/budgetary-modal/budgetary-modal.component';
 
 @Component({
   selector: 'app-budgetary-dialog',
@@ -28,6 +29,7 @@ export class BudgetaryDialogComponent {
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<BudgetaryDialogComponent>,
     private usuariosService: BudgetaryService,
+    public dialog: MatDialog,
     
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
@@ -49,6 +51,19 @@ export class BudgetaryDialogComponent {
       this.usuariosService.add(this.FormBudgetary.value).subscribe(budgetarys => {
         this.dialogRef.close(budgetarys)
       })
+    }
+  }
+
+  async verificar(){
+    const id = this.data._id
+    const existe = await this.usuariosService.verificationUsed(id).toPromise();
+    console.log( existe?.verificado);
+    
+    if(this.FormBudgetary.get('activo')?.value == false){
+      if(existe?.verificado == true){
+        this.dialog.open(BudgetaryModalComponent);
+        this.FormBudgetary.get('activo')?.setValue(true);
+      }
     }
   }
 }

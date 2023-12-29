@@ -15,10 +15,14 @@ export class SalaryComponent {
   text: string = ''
   displayedColumns = ['_id','cantidadCargos','sueldoBase','totalSueldoMensual','totalSueldoAnual']
   displayedColumns2 = ['total','totalCantidadCargos','totalSueldo','totalSueldoMensual','totalSueldoAnual']
-  displayedColumns3 = ['partidaPresupuestaria','cantidadCargos','totalSueldos','totalSueldoAnual','aportes','aguinaldo','total']
+
+  displayedColumns3 = ['nombrePartida','cantidadCargos','sueldoMensual','sueldoAnual','Aguinaldo','CNS','AFP','proVivienda','AporteSolidario','TotalAportes','Total']
+
   displayedColumns4 = ['partidaPresupuestaria','cantidadCargos','totalSueldos','totalCostoAnual','totalAportes','totalAguinaldos','total']
   displayedColumns5 = ['DatosGenerales','TotalItems','TotalSueldoMensual','TotalSueldoAnual','TotalAguinaldo','TotalCNS','TotalAFP','TotalProVivienda','TotalAporteSolidario','TotalAportes','TotalTotal' ]
-  displayedColumns6 = ['_id','cantidadCargos','cantidadItem','cantidadContrato','totalSueldos','totalSueldoAnual','aportes','aguinaldos','total']
+  
+  displayedColumns6 = ['nombreSecretaria','cantidadCargos','cantidadItem','cantidadContrato','sueldoMensual','sueldoAnual','Aguinaldo','CNS','AFP','proVivienda','AporteSolidario','TotalAportes','Total']
+  
   displayedColumns7 = ['nombre','tipoContrato','nivel','sueldoMensual','sueldoAnual','Aguinaldo','CNS','AFP','proVivienda','AporteSolidario','TotalAportes','Total']
   displayedColumns8 = ['nombre','tipoContrato','estado','nivel','sueldoMensual','sueldoAnual','Aguinaldo','CNS','AFP','proVivienda','AporteSolidario','TotalAportes','Total']
   displayedColumns9 = ['partidaPresupuestaria', 'estado','objetivoPuesto','secretaria','nivel','denominacionPuesto','nombre','tipoContrato','sueldoMensual','tipoGasto'
@@ -29,11 +33,17 @@ export class SalaryComponent {
   dataSource3 = new MatTableDataSource<any>([]);
   dataSource4 = new MatTableDataSource<any>([]);
   dataSource5 = new MatTableDataSource<any>([]);
-  dataSource6 = new MatTableDataSource<any>([]);  
+  
+  dataSource6 = new MatTableDataSource<any>([]);
+
   dataSource7 = new MatTableDataSource<any>([]);
   dataSource8 = new MatTableDataSource<any>([]);
   dataSource9 = new MatTableDataSource<any>([]);
   dataSource10 = new MatTableDataSource<any>([]);
+  
+  dataSource11 = new MatTableDataSource<any>([]);
+  
+  dataSource12 = new MatTableDataSource<any>([]);
 
   @ViewChild('paginatorParPre') paginatorParPre: MatPaginator;
   @ViewChild('paginatorEscSal') paginatorEscSal: MatPaginator;
@@ -52,8 +62,10 @@ export class SalaryComponent {
     this.GetTotalItemsSalariosGlobal()
     this.GetTotalEvetualesSalariosGlobal()
     this.GetSecretariasGlobal()
+    this.GetSecretariasFull()
     this.GetFullItems()
     this.GetFullEventuales()
+    this.GetGlobalPartidas()
   }
   ngAfterViewInit() {
     
@@ -73,8 +85,8 @@ export class SalaryComponent {
   }
 
   GetTotalPartidaPresupestaria() {
-    this.cargoService.getEscalaSalarialPartidaPresupuestaria().subscribe(data => {
-      this.dataSource3 = new MatTableDataSource(data.totalSalarysPartida)
+    this.cargoService.getFullPartidas().subscribe(data => {
+      this.dataSource3 = new MatTableDataSource(data.fullPartidas)
       this.dataSource3.paginator = this.paginatorParPre;
     })
   }
@@ -97,13 +109,19 @@ export class SalaryComponent {
     })
   }
   
-
-  GetSecretariasGlobal() {
-    this.cargoService.getTotalSecretariaSalario().subscribe(data => {
-      this.dataSource6 = new MatTableDataSource(data.secretariasTotalSalarys)
+  GetSecretariasFull() {
+    this.cargoService.getFullSecretarias().subscribe(data => {
+      this.dataSource6 = new MatTableDataSource(data.fullSecretarias)
       this.dataSource6.paginator = this.paginatorPorSec;
     })
   }
+
+  GetSecretariasGlobal() {
+    this.cargoService.getGlobalSecretarias().subscribe(data => {
+      this.dataSource11 = new MatTableDataSource(data.globalSecretarias)
+    })
+  }
+
   /**/ 
   GetFullItems() {
     this.cargoService.getFullItems().subscribe(data => {
@@ -118,9 +136,15 @@ export class SalaryComponent {
         this.dataSource8 = new MatTableDataSource(data.fullEventuales)
         this.dataSource8.paginator = this.paginatorEventuales;
     })
-  }   
-
+  } 
   
+  /**/ 
+  GetGlobalPartidas() {
+    this.cargoService.getGlobalPartidas().subscribe(data => {
+      this.dataSource12= new MatTableDataSource(data.globalPartidas)
+  })
+} 
+
   exportToExcel(dataSources: MatTableDataSource<any>[], displayedColumnsArray: string[][], fileNames: string[]): void {
     const book: XLSX.WorkBook = XLSX.utils.book_new();
 
@@ -148,11 +172,9 @@ export class SalaryComponent {
         });
         
         const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(table);
-        XLSX.utils.book_append_sheet(book, worksheet, `Sheet${index + 1}`);
+        XLSX.utils.book_append_sheet(book, worksheet, `Registros${index + 1}`);
     });
 
     XLSX.writeFile(book, 'EscalaSalarial.xlsx');
   }
-  
-  
 }

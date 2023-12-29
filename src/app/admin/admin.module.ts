@@ -20,6 +20,7 @@ import { DependencesDialogComponent } from './dialogs/dependences-dialog/depende
 import { DependencesComponent } from './pages/dependences/dependences.component';
 import { RotationOfficerDialogComponent } from './dialogs/rotation-officer-dialog/rotation-officer-dialog.component';
 import { RotationJobDialogComponent } from './dialogs/rotation-job-dialog/rotation-job-dialog.component';
+import { BudgetaryModalComponent } from './modals/budgetary-modal/budgetary-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RotationJobDialogComponent } from './dialogs/rotation-job-dialog/rotati
     DependencesDialogComponent,
     DependencesComponent,
     RotationOfficerDialogComponent,
-    RotationJobDialogComponent
+    RotationJobDialogComponent,
+    BudgetaryModalComponent
      
   ],
   imports: [

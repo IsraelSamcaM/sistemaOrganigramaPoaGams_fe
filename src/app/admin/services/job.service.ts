@@ -111,20 +111,45 @@ export class JobService {
     )
   }
 
+  /* get total por secretarias*/ 
+  getFullSecretarias() {
+    return this.http.get<{ fullSalariosSecretarias: any[], length: number }>(`${base_url}/consults/fullSecretarias`).pipe(
+      map(resp => {
+        return { fullSecretarias: resp.fullSalariosSecretarias, length: resp.length }
+      })
+    )
+  }
+  /* get global por secretarias*/ 
+  getGlobalSecretarias() {
+    return this.http.get<{ globalSalariosSecretarias: any[], length: number }>(`${base_url}/consults/globalSecretarias`).pipe(
+      map(resp => {
+        return { globalSecretarias: resp.globalSalariosSecretarias, length: resp.length }
+      })
+    )
+  }
+
+  /* get tabla por partidas presupuestarias*/ 
+  getFullPartidas() {
+    return this.http.get<{ fullSalariosPartidas: any[], length: number }>(`${base_url}/consults/fullPartidas`).pipe(
+      map(resp => {
+        return { fullPartidas: resp.fullSalariosPartidas, length: resp.length }
+      })
+    )
+  }
+  /* get totales por partidas presupuestarias*/ 
+  getGlobalPartidas() {
+    return this.http.get<{ globalSalariosPartidas: any[], length: number }>(`${base_url}/consults/globalPartidas`).pipe(
+      map(resp => {
+        return { globalPartidas: resp.globalSalariosPartidas, length: resp.length }
+      })
+    )
+  }
+
   //metodo de total escala salarial por partida presupuestaria
   getEscalaSalarialPartidaPresupuestaria() {
     return this.http.get<{ totalSalariosPartida: any[], length: number }>(`${base_url}/jobs/escalaPartidaPresupuestaria`).pipe(
       map(resp => {
         return { totalSalarysPartida: resp.totalSalariosPartida, length: resp.length }
-      })
-    )
-  }
-
-  //metodo que saca todo por secretaria 
-  getTotalSecretariaSalario() {
-    return this.http.get<{ globalSecretarias: any[], length: number }>(`${base_url}/jobs/totalGlobalSecretarias`).pipe(
-      map(resp => {
-        return { secretariasTotalSalarys: resp.globalSecretarias, length: resp.length }
       })
     )
   }
