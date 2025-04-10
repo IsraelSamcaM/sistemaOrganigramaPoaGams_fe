@@ -1,27 +1,61 @@
-# ORGCHARTFRONTEND
+# 🖥️ Frontend - Sistema POA y Organigrama
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
+Este proyecto es el frontend de la aplicación web desarrollada con Angular. Se encarga de la visualización y gestión de diferentes elementos del POA (Plan Operativo Anual), permitiendo interactuar con el backend para crear cargos, dependencias, niveles, y visualizar automáticamente el organigrama institucional.
 
-## Development server
+## 📄 Páginas disponibles
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Funcionarios
+- Cargos
+- Partidas Presupuestarias
+- Niveles
+- Organigrama
+- Escala Salarial
+- Dependencias
 
-## Code scaffolding
+## ⚙️ Requisitos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Tener instalado [Node.js](https://nodejs.org/)
+- Tener instalado Angular CLI globalmente:
 
-## Build
+```bash
+npm install -g @angular/cli
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## ▶️ Instalación y ejecución
 
-## Running unit tests
+1. Clona el repositorio y entra en la carpeta del proyecto.
+2. Instala las dependencias:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```bash
+npm install
+```
 
-## Running end-to-end tests
+3. Ejecuta el servidor de desarrollo:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+ng serve
+```
 
-## Further help
+4. Abre tu navegador y navega a:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+http://localhost:4200/
+```
+
+La aplicación se recargará automáticamente si cambias alguno de los archivos fuente.
+
+## 🖼️ Interfaz de usuario
+
+Aquí se visualizan las principales vistas del sistema para la gestión del POA y el organigrama institucional:
+
+### 📋 Tabla de Funcionarios
+
+![Tabla de Funcionarios](./src/assets/tableOfficers.png)
+
+### 🧩 Organigrama
+
+![Organigrama](./src/assets/organigrama.png)
+
+### 💰 Escala Salarial
+
+![Escala Salarial](./src/assets/escalaSalarial.png)
